@@ -1,3 +1,6 @@
+## v0.1.2 - Read Problem Data 
+* **Commit**: 2026-02-01 17:27
+* data.load function
 ## v0.1.1 - Problem Solution and Constraints
 * **Commit**: 2026-02-01 15:59
 * Update Problem constructor
