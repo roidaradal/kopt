@@ -1,3 +1,6 @@
+## v0.1.4 - Bin Packing 
+* **Commit**: 2026-02-01 23:04
+* problem.newBinPacking
 ## v0.1.3 - Bin Cover 
 * **Commit**: 2026-02-01 22:56
 * data.Bins

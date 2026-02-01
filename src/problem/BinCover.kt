@@ -21,6 +21,5 @@ fun binCover(name: String): Problem? {
 		val sums = solution.partitionSums(cfg.bins, cfg.weight).filter { it > 0 }
 		sums.all { sum -> sum >= cfg.capacity }
 	}
-
 	return p
 }
