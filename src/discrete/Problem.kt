@@ -2,26 +2,32 @@ package discrete
 
 class Problem(
     val name: String,
-    val variables: List<Variable> = listOf(),
-    val type: ProblemType = ProblemType.None,
-    val goal: Goal = Goal.None,
-    val objectiveFn: ObjectiveFn? = null,
-    val solutionCoreFn: SolutionCoreFn? = null,
-    val solutionStringFn: SolutionStringFn? = null,
-    val solutionDisplayFn: SolutionDisplayFn? = null,
-    ) {
+    val variables: List<Variable> = emptyList(),
+    var type: ProblemType = ProblemType.None,
+    var goal: Goal = Goal.None,
+    var objectiveFn: ObjectiveFn? = null,
+    var solutionCoreFn: SolutionCoreFn? = null,
+    var solutionStringFn: SolutionStringFn? = null,
+    var solutionDisplayFn: SolutionDisplayFn? = null,
+    val description: String? = null,
+) {
     val domain: MutableMap<Variable, List<Value>> = mutableMapOf()
     val constraints: MutableList<Constraint> = mutableListOf()
     var uniformDomain: List<Value>? = null
         internal set
 
-    override fun toString() = "<Problem: $name>"
+    override fun toString() = "<Problem: $name>" + if(description == null) "" else "\n" +  (description ?: "")
 
     val isSatisfaction: Boolean
         get() = goal == Goal.Satisfy
 
     val isOptimization: Boolean
         get() = goal == Goal.Minimize || goal == Goal.Maximize
+
+    fun addVariableDomains(values: List<Value>) {
+        variables.forEach { variable -> domain[variable] = values.toList() }
+        uniformDomain = values
+    }
 
     fun addUniversalConstraint(test: ConstraintFn) {
         val penalty = if (goal == Goal.Maximize) -HardPenalty else HardPenalty
@@ -35,8 +41,8 @@ class Problem(
     fun isSatisfied(solution: Solution) = constraints.all { it.isSatisfied(solution) }
 
     fun computeScore(solution: Solution) {
-        if (objectiveFn == null) return
-        solution.score = objectiveFn(solution)
+        val score = objectiveFn?.invoke(solution)
+        if (score != null) solution.score = score
     }
 }
 

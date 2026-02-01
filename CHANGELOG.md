@@ -1,3 +1,13 @@
+## v0.1.3 - Bin Cover 
+* **Commit**: 2026-02-01 22:56
+* data.Bins
+* discrete.Variables
+* fn.Solution.asPartition
+* fn.Solution.partitionStrings, partitionSums
+* fn.coreSortedPartition
+* fn.scoreCountUniqueValues
+* fn.stringPartition
+* problem.newBinCover
 ## v0.1.2 - Read Problem Data 
 * **Commit**: 2026-02-01 17:27
 * data.load function

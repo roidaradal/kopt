@@ -58,7 +58,7 @@ fun load(name: String): StringMap? {
 					mode = Mode.List
 				}
 				Mode.Inside if isEntry -> {
-					val (key, value) = line.split(entrySeparator, limit = 2)
+					val (key, value) = line.split(entrySeparator, limit = 2).map { it.trim() }
 					data[key] = value
 				}
 				Mode.List if line == "]" -> {
@@ -81,14 +81,14 @@ fun load(name: String): StringMap? {
 	return cacheData[mainKey]
 }
 
-fun String.parseInt() = this.toIntOrNull() ?: 0
-fun String.parseDouble() = this.toDoubleOrNull() ?: 0.0
+fun String?.parseInt() = this?.toIntOrNull() ?: 0
+fun String?.parseDouble() = this?.toDoubleOrNull() ?: 0.0
 
-fun String.stringList(): List<String> = this.trim().split("\\s+".toRegex())
-fun String.intList(): List<Int> = this.stringList().map { it.parseInt() }
-fun String.doubleList(): List<Double> = this.stringList().map { it.parseDouble() }
+fun String?.toStringList() = if (this.isNullOrBlank()) emptyList() else this.trim().split("\\s+".toRegex())
+fun String?.toIntList() = if (this.isNullOrBlank()) emptyList() else this.toStringList().map { it.parseInt() }
+fun String?.toDoubleList() = if (this.isNullOrBlank()) emptyList() else this.toStringList().map { it.parseDouble() }
 
-fun String.parseList(): List<String> = this.trim().split(listSeparator).map { it.trim() }
+fun String.parseList() = this.trim().split(listSeparator).map { it.trim() }
 fun String.parseMap(): StringMap {
 	return this.parseList().associate {
 		val (key, value) = it.split(entrySeparator, limit = 2)

@@ -11,4 +11,7 @@ class Solution {
 	var isPartial: Boolean = true
 	val map: MutableMap<Variable, Value> = mutableMapOf()
 	private val variableOrder: MutableList<Variable> = mutableListOf()
+
+	val values: List<Value>
+		get() = map.values.toList()
 }
