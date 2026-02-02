@@ -13,5 +13,5 @@ class Constraint(
 	val variables: List<Variable>
 ){
 	fun isSatisfied(solution: Solution) = test(solution)
-	fun computePenalty(solution: Solution): Penalty = if (isSatisfied(solution)) 0.0 else penalty
+//	fun computePenalty(solution: Solution): Penalty = if (isSatisfied(solution)) 0.0 else penalty
 }

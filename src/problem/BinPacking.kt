@@ -1,5 +1,6 @@
 package problem
 
+import data.newName
 import discrete.Goal
 import discrete.Problem
 import fn.partitionSums

@@ -10,7 +10,7 @@ import fn.stringPartition
 
 fun newBinPartitionProblem(name: String): Pair<Problem?, Bins?> {
 	val cfg = Bins.new(name) ?: return Pair(null, null)
-	val problemString = "Bins: ${cfg.bins}\nCapacity: ${cfg.capacity}\nWeight: ${cfg.weight}"
+	val description = "Bins: ${cfg.bins}\nCapacity: ${cfg.capacity}\nWeight: ${cfg.weight}"
 	val p = Problem(
 		name,
 		type = ProblemType.Partition,
@@ -18,7 +18,7 @@ fun newBinPartitionProblem(name: String): Pair<Problem?, Bins?> {
 		objectiveFn = ::scoreCountUniqueValues,
 		solutionCoreFn = coreSortedPartition(cfg.bins, cfg.weight),
 		solutionStringFn = stringPartition(cfg.bins, cfg.weight),
-		description = problemString,
+		description = description,
 	)
 	p.addVariableDomains(cfg.bins)
 	return Pair(p, cfg)

@@ -1,3 +1,11 @@
+## v0.1.5 - Interval
+* **Commit**: 2026-02-02 21:18
+* data.Intervals
+* fn.Solution.asSubset 
+* fn.stringSubset
+* fn.scoreSubsetSize
+* fn.scoreSumWeightedValues
+* problem.newInterval
 ## v0.1.4 - Bin Packing 
 * **Commit**: 2026-02-01 23:04
 * problem.newBinPacking

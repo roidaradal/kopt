@@ -32,28 +32,28 @@ fun load(name: String): StringMap? {
 			return null
 		}
 		var (testCase, currentKey) = listOf("", "")
-		var group: MutableList<String> = mutableListOf()
-		var data: MutableMap<String, String> = mutableMapOf()
 		var mode = Mode.Outside
+		val group: MutableList<String> = mutableListOf()
+		val data: MutableMap<String, String> = mutableMapOf()
 		for (line in lines) {
-			val braceEnd = line.endsWith('{')
-			val bracketEnd = line.endsWith('[')
+			val endsWithBrace = line.endsWith('{')
+			val endsWithBracket = line.endsWith('[')
 			val isEntry = line.contains(entrySeparator)
 			when (mode) {
-				Mode.Outside if braceEnd -> {
+				Mode.Outside if endsWithBrace -> {
 					testCase = line.trimEnd('{').trim()
 					mode = Mode.Inside
 				}
 				Mode.Inside if line == "}" -> {
-					cacheData[Pair(problemName, testCase)] = data
-					data = mutableMapOf()
+					cacheData[Pair(problemName, testCase)] = data.toMap()
+					data.clear()
 					mode = Mode.Outside
 				}
-				Mode.Inside if isEntry && braceEnd -> {
+				Mode.Inside if isEntry && endsWithBrace -> {
 					currentKey = line.split(entrySeparator)[0].trim()
 					mode = Mode.Map
 				}
-				Mode.Inside if isEntry && bracketEnd -> {
+				Mode.Inside if isEntry && endsWithBracket -> {
 					currentKey = line.split(entrySeparator)[0].trim()
 					mode = Mode.List
 				}
@@ -63,12 +63,12 @@ fun load(name: String): StringMap? {
 				}
 				Mode.List if line == "]" -> {
 					data[currentKey] = group.joinToString(listSeparator)
-					group = mutableListOf()
+					group.clear()
 					mode = Mode.Inside
 				}
 				Mode.Map if line == "}" -> {
 					data[currentKey] = group.joinToString(listSeparator)
-					group = mutableListOf()
+					group.clear()
 					mode = Mode.Inside
 				}
 				Mode.List, Mode.Map -> {
@@ -81,17 +81,19 @@ fun load(name: String): StringMap? {
 	return cacheData[mainKey]
 }
 
-fun String?.parseInt() = this?.toIntOrNull() ?: 0
-fun String?.parseDouble() = this?.toDoubleOrNull() ?: 0.0
+fun newName(problem: String, variant: String, n: Int): String = "$problem$nameSeparator$variant$nameSeparator$n"
 
-fun String?.toStringList() = if (this.isNullOrBlank()) emptyList() else this.trim().split("\\s+".toRegex())
-fun String?.toIntList() = if (this.isNullOrBlank()) emptyList() else this.toStringList().map { it.parseInt() }
-fun String?.toDoubleList() = if (this.isNullOrBlank()) emptyList() else this.toStringList().map { it.parseDouble() }
+fun String?.parseInt(): Int = this?.toIntOrNull() ?: 0
+fun String?.parseDouble(): Double = this?.toDoubleOrNull() ?: 0.0
 
-fun String.parseList() = this.trim().split(listSeparator).map { it.trim() }
-fun String.parseMap(): StringMap {
-	return this.parseList().associate {
-		val (key, value) = it.split(entrySeparator, limit = 2)
-		Pair(key, value)
-	}
-}
+fun String?.toStringList(): List<String> = if (this.isNullOrBlank()) emptyList() else this.trim().split("\\s+".toRegex())
+//fun String?.toIntList(): List<Int> = if (this.isNullOrBlank()) emptyList() else this.toStringList().map { it.parseInt() }
+fun String?.toDoubleList(): List<Double> = if (this.isNullOrBlank()) emptyList() else this.toStringList().map { it.parseDouble() }
+
+//fun String.parseList() = this.trim().split(listSeparator).map { it.trim() }
+//fun String.parseMap(): StringMap {
+//	return this.parseList().associate {
+//		val (key, value) = it.split(entrySeparator, limit = 2).map(String::trim)
+//		Pair(key, value)
+//	}
+//}

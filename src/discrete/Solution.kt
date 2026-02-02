@@ -7,10 +7,10 @@ typealias SolutionStringFn = (Solution) -> String
 typealias SolutionDisplayFn = (Solution) -> String
 
 class Solution {
-	var score: Score = 0.0
-	var isPartial: Boolean = true
+//	var score: Score = 0.0
+//	var isPartial: Boolean = true
 	val map: MutableMap<Variable, Value> = mutableMapOf()
-	private val variableOrder: MutableList<Variable> = mutableListOf()
+//	private val variableOrder: MutableList<Variable> = mutableListOf()
 
 	val values: List<Value>
 		get() = map.values.toList()

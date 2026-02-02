@@ -8,21 +8,21 @@ class Problem(
     var objectiveFn: ObjectiveFn? = null,
     var solutionCoreFn: SolutionCoreFn? = null,
     var solutionStringFn: SolutionStringFn? = null,
-    var solutionDisplayFn: SolutionDisplayFn? = null,
+//    var solutionDisplayFn: SolutionDisplayFn? = null,
     val description: String? = null,
 ) {
     val domain: MutableMap<Variable, List<Value>> = mutableMapOf()
     val constraints: MutableList<Constraint> = mutableListOf()
     var uniformDomain: List<Value>? = null
-        internal set
+        private set
 
-    override fun toString() = "<Problem: $name>" + if(description == null) "" else "\n" +  (description ?: "")
+    override fun toString(): String = "<Problem: $name>" + (if(description == null) "" else "\n") +  (description ?: "")
 
-    val isSatisfaction: Boolean
-        get() = goal == Goal.Satisfy
-
-    val isOptimization: Boolean
-        get() = goal == Goal.Minimize || goal == Goal.Maximize
+//    val isSatisfaction: Boolean
+//        get() = goal == Goal.Satisfy
+//
+//    val isOptimization: Boolean
+//        get() = goal == Goal.Minimize || goal == Goal.Maximize
 
     fun addVariableDomains(values: List<Value>) {
         variables.forEach { variable -> domain[variable] = values.toList() }
@@ -38,26 +38,26 @@ class Problem(
         constraints.add(Constraint(test, penalty, variables))
     }
 
-    fun isSatisfied(solution: Solution) = constraints.all { it.isSatisfied(solution) }
-
-    fun computeScore(solution: Solution) {
-        val score = objectiveFn?.invoke(solution)
-        if (score != null) solution.score = score
-    }
+//    fun isSatisfied(solution: Solution) = constraints.all { it.isSatisfied(solution) }
+//
+//    fun computeScore(solution: Solution) {
+//        val score = objectiveFn?.invoke(solution)
+//        if (score != null) solution.score = score
+//    }
 }
 
 enum class Goal {
     None,
     Maximize,
     Minimize,
-    Satisfy,
+//    Satisfy,
 }
 
 enum class ProblemType {
     None,
-    Assignment,
     Partition,
-    Sequence,
     Subset,
-    Path,
+//    Assignment,
+//    Sequence,
+//    Path,
 }
