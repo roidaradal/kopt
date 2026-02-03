@@ -24,8 +24,7 @@ fun newInterval(variant: String, n: Int): Problem? {
 
 fun newActivitySelectionProblem(name: String): Pair<Problem?, Intervals?> {
 	val cfg = Intervals.new(name) ?: return Pair(null, null)
-	val tail = if (cfg.weight.isEmpty()) "" else "\nWeight: ${cfg.weight}"
-	val description = "Activities: ${cfg.activities}\nStart: ${cfg.start}\nEnd: ${cfg.end}" + tail
+	val description = "Activities: ${cfg.activities}\nStart: ${cfg.start}\nEnd: ${cfg.end}"
 	val p = Problem(
 		name,
 		description = description,
@@ -61,6 +60,7 @@ fun weightedActivitySelection(name: String): Problem? {
 	if (p == null || cfg == null) return null
 	if (cfg.activities.size != cfg.weight.size) return null
 
+	p.description += "\nWeight: ${cfg.weight}"
 	p.objectiveFn = scoreSumWeightedValues(p.variables, cfg.weight)
 	return p
 }

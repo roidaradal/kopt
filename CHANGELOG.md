@@ -1,3 +1,7 @@
+## v0.1.7 - Max Coverage 
+* **Commit**: 2026-02-03 20:54
+* data.Subsets
+* problem.newMaxCoverage
 ## v0.1.6 - Knapsack 
 * **Commit**: 2026-02-03 20:32
 * data.KnapsackCfg

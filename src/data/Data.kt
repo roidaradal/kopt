@@ -115,9 +115,13 @@ fun String?.parseList(): List<String> {
 		this.trim().split(listSeparator).map { it.trim() }
 	}
 }
-//fun String.parseMap(): StringMap {
-//	return this.parseList().associate {
-//		val (key, value) = it.split(entrySeparator, limit = 2).map(String::trim)
-//		Pair(key, value)
-//	}
-//}
+fun String?.parseMap(): StringMap {
+	return if(this.isNullOrBlank()) {
+		emptyMap()
+	}else {
+		this.parseList().associate {
+			val (key, value) = it.split(entrySeparator, limit = 2).map(String::trim)
+			Pair(key, value)
+		}
+	}
+}

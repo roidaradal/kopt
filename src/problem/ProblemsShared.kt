@@ -1,12 +1,16 @@
 package problem
 
 import data.Bins
+import data.Subsets
+import discrete.Domain
 import discrete.Problem
 import discrete.ProblemType
 import discrete.Variables
 import fn.coreSortedPartition
 import fn.scoreCountUniqueValues
+import fn.scoreSubsetSize
 import fn.stringPartition
+import fn.stringSubset
 
 fun newBinPartitionProblem(name: String): Pair<Problem?, Bins?> {
 	val cfg = Bins.new(name) ?: return Pair(null, null)
@@ -21,5 +25,20 @@ fun newBinPartitionProblem(name: String): Pair<Problem?, Bins?> {
 		solutionStringFn = stringPartition(cfg.bins, cfg.weight),
 	)
 	p.addVariableDomains(cfg.bins)
+	return Pair(p, cfg)
+}
+
+fun newSubsetsProblem(name: String): Pair<Problem?, Subsets?> {
+	val cfg = Subsets.new(name) ?: return Pair(null, null)
+	val description = "Universal: ${cfg.universal}\nNames: ${cfg.names}\nSubsets: ${cfg.subsets}"
+	val p = Problem(
+		name,
+		description = description,
+		type = ProblemType.Subset,
+		variables = Variables.from(cfg.names),
+		objectiveFn = ::scoreSubsetSize,
+		solutionStringFn = stringSubset(cfg.names),
+	)
+	p.addVariableDomains(Domain.boolean())
 	return Pair(p, cfg)
 }

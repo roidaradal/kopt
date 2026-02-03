@@ -55,6 +55,7 @@ fun quadraticKnapsack(name: String): Problem? {
 	val (p, cfg) = newKnapsackProblem(name)
 	if (p == null || cfg == null) return null
 
+	p.description += "\nPairBonus: ${cfg.pairBonus}"
 	p.objectiveFn = fun(solution: Solution): Score {
 		val baseValue = scoreSumWeightedValues(p.variables, cfg.value).invoke(solution)
 		val selected = solution.asSubset().mapList(cfg.items).toSet()

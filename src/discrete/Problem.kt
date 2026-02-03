@@ -9,7 +9,7 @@ class Problem(
     var solutionCoreFn: SolutionCoreFn? = null,
     var solutionStringFn: SolutionStringFn? = null,
 //    var solutionDisplayFn: SolutionDisplayFn? = null,
-    val description: String? = null,
+    var description: String? = null,
 ) {
     val domain: MutableMap<Variable, List<Value>> = mutableMapOf()
     val constraints: MutableList<Constraint> = mutableListOf()
