@@ -3,6 +3,7 @@ package problem
 import data.newName
 import discrete.Goal
 import discrete.Problem
+import discrete.Solution
 import fn.partitionSums
 
 fun newBinCover(variant: String, n: Int): Problem? {
@@ -18,9 +19,9 @@ fun binCover(name: String): Problem? {
 	if (p == null || cfg == null) return null
 
 	p.goal = Goal.Maximize
-	p.addUniversalConstraint { solution ->
+	p.addUniversalConstraint(fun(solution: Solution): Boolean {
 		val sums = solution.partitionSums(cfg.bins, cfg.weight).filter { it > 0 }
-		sums.all { sum -> sum >= cfg.capacity }
-	}
+		return sums.all { it >= cfg.capacity }
+	})
 	return p
 }

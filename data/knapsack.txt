@@ -1,0 +1,41 @@
+basic.1 {
+    capacity    : 10
+    items       : A   B   C   D
+    weight      : 6   3   4   2
+    value       : 30  14  16  9
+}
+basic.2 {
+    capacity    : 5
+    items       : A   B   C
+    weight      : 3   1   2
+    value       : 35  12  20
+}
+basic.3 {
+    capacity    : 10
+    items       : A   B   C   D   E
+    weight      : 4   5   3   2   3
+    value       : 6   8   5   3   4
+}
+quadratic.1 {
+    capacity    : 30
+    items       : P   H   W   C
+    weight      : 20  10  10  5
+    value       : 50  20  30  10
+    pairBonus   : [
+        P   H   15
+        P   C   10
+        H   C   5
+        W   H   8
+    ]
+}
+quadratic.2 {
+    capacity    : 10
+    items       : A   B   C   D
+    weight      : 3   5   2   1
+    value       : 10  12  8   2
+    pairBonus   : [
+        A   B   5
+        B   C   4
+        A   D   3
+    ]
+}

@@ -28,11 +28,11 @@ fun newActivitySelectionProblem(name: String): Pair<Problem?, Intervals?> {
 	val description = "Activities: ${cfg.activities}\nStart: ${cfg.start}\nEnd: ${cfg.end}" + tail
 	val p = Problem(
 		name,
-		type = ProblemType.Subset,
-		variables = Variables.from(cfg.activities),
-		goal = Goal.Maximize,
-		solutionStringFn = stringSubset(cfg.activities),
 		description = description,
+		type = ProblemType.Subset,
+		goal = Goal.Maximize,
+		variables = Variables.from(cfg.activities),
+		solutionStringFn = stringSubset(cfg.activities),
 	)
 	p.addVariableDomains(Domain.boolean())
 	p.addUniversalConstraint(fun(solution: Solution): Boolean {
@@ -60,6 +60,7 @@ fun weightedActivitySelection(name: String): Problem? {
 	val (p, cfg) = newActivitySelectionProblem(name)
 	if (p == null || cfg == null) return null
 	if (cfg.activities.size != cfg.weight.size) return null
+
 	p.objectiveFn = scoreSumWeightedValues(p.variables, cfg.weight)
 	return p
 }

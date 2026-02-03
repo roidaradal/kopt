@@ -1,3 +1,7 @@
+## v0.1.6 - Knapsack 
+* **Commit**: 2026-02-03 20:32
+* data.KnapsackCfg
+* problem.newKnapsack
 ## v0.1.5 - Interval
 * **Commit**: 2026-02-02 21:18
 * data.Intervals

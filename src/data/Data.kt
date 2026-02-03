@@ -7,8 +7,8 @@ private enum class Mode {
 	Outside, Inside, List, Map
 }
 
-private typealias StringPair = Pair<String, String>
-private typealias StringMap = Map<String, String>
+typealias StringPair = Pair<String, String>
+typealias StringMap = Map<String, String>
 
 const val commentStart = '#'
 const val nameSeparator = '.'
@@ -86,11 +86,35 @@ fun newName(problem: String, variant: String, n: Int): String = "$problem$nameSe
 fun String?.parseInt(): Int = this?.toIntOrNull() ?: 0
 fun String?.parseDouble(): Double = this?.toDoubleOrNull() ?: 0.0
 
-fun String?.toStringList(): List<String> = if (this.isNullOrBlank()) emptyList() else this.trim().split("\\s+".toRegex())
-//fun String?.toIntList(): List<Int> = if (this.isNullOrBlank()) emptyList() else this.toStringList().map { it.parseInt() }
-fun String?.toDoubleList(): List<Double> = if (this.isNullOrBlank()) emptyList() else this.toStringList().map { it.parseDouble() }
+fun String?.toStringList(): List<String> {
+	return if (this.isNullOrBlank()) {
+		emptyList()
+	} else {
+		this.trim().split("\\s+".toRegex())
+	}
+}
+fun String?.toIntList(): List<Int> {
+	return if (this.isNullOrBlank()) {
+		emptyList()
+	} else {
+		this.toStringList().map { it.parseInt() }
+	}
+}
+fun String?.toDoubleList(): List<Double> {
+	return if (this.isNullOrBlank()) {
+		emptyList()
+	} else {
+		this.toStringList().map { it.parseDouble() }
+	}
+}
 
-//fun String.parseList() = this.trim().split(listSeparator).map { it.trim() }
+fun String?.parseList(): List<String> {
+	return if (this.isNullOrBlank()) {
+		emptyList()
+	} else {
+		this.trim().split(listSeparator).map { it.trim() }
+	}
+}
 //fun String.parseMap(): StringMap {
 //	return this.parseList().associate {
 //		val (key, value) = it.split(entrySeparator, limit = 2).map(String::trim)

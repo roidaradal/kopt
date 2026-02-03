@@ -12,18 +12,12 @@ fun Solution.asPartition(values: List<Value>): List<List<Variable>> {
 	return values.map { groups[it] ?: emptyList() }
 }
 
-fun Solution.asSubset(): List<Variable> {
-	val subset = mutableListOf<Variable>()
-	for ((variable, value) in this.map) {
-		if (value == 1) subset.add(variable)
-	}
-	return subset
-}
+fun Solution.asSubset(): List<Variable> = this.map.filter{ (_, value) -> value == 1 }.map { (variable, _) -> variable}
 
 fun <T> Solution.partitionStrings(values: List<Value>, items: List<T>): List<List<String>> {
-	return asPartition(values).map { group -> group.mapList(items).map { it.toString() } }
+	return this.asPartition(values).map { group -> group.mapList(items).map { it.toString() } }
 }
 
 fun Solution.partitionSums(values: List<Value>, items: List<Double>): List<Double> {
-	return asPartition(values).map { group -> group.mapList(items).sum() }
+	return this.asPartition(values).map { group -> group.mapList(items).sum() }
 }
