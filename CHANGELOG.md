@@ -1,3 +1,7 @@
+## v0.1.8 - Number Partition 
+* **Commit**: 2026-02-04 21:59
+* data.Numbers
+* problem.newNumberPartition
 ## v0.1.7 - Max Coverage 
 * **Commit**: 2026-02-03 20:54
 * data.Subsets

@@ -12,5 +12,6 @@ class Variables {
 class Domain {
 	companion object {
 		fun boolean(): List<Value> = listOf(1, 0)
+		fun range(first: Int, last: Int): List<Value> = (first..last).toList()
 	}
 }

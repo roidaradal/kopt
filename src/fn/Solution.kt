@@ -18,6 +18,6 @@ fun <T> Solution.partitionStrings(values: List<Value>, items: List<T>): List<Lis
 	return this.asPartition(values).map { group -> group.mapList(items).map { it.toString() } }
 }
 
-fun Solution.partitionSums(values: List<Value>, items: List<Double>): List<Double> {
-	return this.asPartition(values).map { group -> group.mapList(items).sum() }
+fun <T: Number>Solution.partitionSums(values: List<Value>, items: List<T>): List<Double> {
+	return this.asPartition(values).map { group -> group.mapList(items).sumOf { it.toDouble() } }
 }

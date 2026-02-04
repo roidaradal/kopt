@@ -21,8 +21,8 @@ class Problem(
 //    val isSatisfaction: Boolean
 //        get() = goal == Goal.Satisfy
 //
-//    val isOptimization: Boolean
-//        get() = goal == Goal.Minimize || goal == Goal.Maximize
+    val isOptimization: Boolean
+        get() = goal == Goal.Minimize || goal == Goal.Maximize
 
     fun addVariableDomains(values: List<Value>) {
         variables.forEach { variable -> domain[variable] = values.toList() }
