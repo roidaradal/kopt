@@ -1,6 +1,7 @@
 package problem
 
 import data.Bins
+import data.Numbers
 import data.Subsets
 import discrete.Domain
 import discrete.Problem
@@ -38,6 +39,20 @@ fun newSubsetsProblem(name: String): Pair<Problem?, Subsets?> {
 		variables = Variables.from(cfg.names),
 		objectiveFn = ::scoreSubsetSize,
 		solutionStringFn = stringSubset(cfg.names),
+	)
+	p.addVariableDomains(Domain.boolean())
+	return Pair(p, cfg)
+}
+
+fun newNumbersSubsetProblem(name: String): Pair<Problem?, Numbers?> {
+	val cfg = Numbers.new(name) ?: return Pair(null, null)
+	val description = "Numbers: ${cfg.numbers}"
+	val p = Problem(
+		name,
+		description = description,
+		type = ProblemType.Subset,
+		variables = Variables.from(cfg.numbers),
+		solutionStringFn = stringSubset(cfg.numbers),
 	)
 	p.addVariableDomains(Domain.boolean())
 	return Pair(p, cfg)

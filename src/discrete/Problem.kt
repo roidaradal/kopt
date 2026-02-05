@@ -18,9 +18,9 @@ class Problem(
 
     override fun toString(): String = "<Problem: $name>" + (if(description == null) "" else "\n") +  (description ?: "")
 
-//    val isSatisfaction: Boolean
-//        get() = goal == Goal.Satisfy
-//
+    val isSatisfaction: Boolean
+        get() = goal == Goal.Satisfy
+
     val isOptimization: Boolean
         get() = goal == Goal.Minimize || goal == Goal.Maximize
 
@@ -50,7 +50,7 @@ enum class Goal {
     None,
     Maximize,
     Minimize,
-//    Satisfy,
+    Satisfy,
 }
 
 enum class ProblemType {

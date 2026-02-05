@@ -1,3 +1,6 @@
+## v0.1.9 - Subset Sum 
+* **Commit**: 2026-02-05 20:50
+* problem.newSubsetSum
 ## v0.1.8 - Number Partition 
 * **Commit**: 2026-02-04 21:59
 * data.Numbers
