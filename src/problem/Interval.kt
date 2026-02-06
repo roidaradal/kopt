@@ -28,8 +28,8 @@ fun newActivitySelectionProblem(name: String): Pair<Problem?, Intervals?> {
 	val p = Problem(
 		name,
 		description = description,
-		type = ProblemType.Subset,
-		goal = Goal.Maximize,
+		type = ProblemType.SUBSET,
+		goal = Goal.MAXIMIZE,
 		variables = Variables.from(cfg.activities),
 		solutionStringFn = stringSubset(cfg.activities),
 	)

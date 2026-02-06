@@ -28,9 +28,9 @@ fun numberPartition(name: String): Problem? {
 	val p = Problem(
 		name,
 		description = description,
-		type = ProblemType.Partition,
+		type = ProblemType.PARTITION,
 		variables = Variables.from(cfg.numbers),
-		goal = Goal.Minimize,
+		goal = Goal.MINIMIZE,
 		solutionCoreFn = coreSortedPartition(domain, cfg.numbers),
 		solutionStringFn = stringPartition(domain, cfg.numbers),
 	)

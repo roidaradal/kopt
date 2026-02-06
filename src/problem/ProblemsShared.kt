@@ -19,7 +19,7 @@ fun newBinPartitionProblem(name: String): Pair<Problem?, Bins?> {
 	val p = Problem(
 		name,
 		description = description,
-		type = ProblemType.Partition,
+		type = ProblemType.PARTITION,
 		variables = Variables.from(cfg.weight),
 		objectiveFn = ::scoreCountUniqueValues,
 		solutionCoreFn = coreSortedPartition(cfg.bins, cfg.weight),
@@ -35,7 +35,7 @@ fun newSubsetsProblem(name: String): Pair<Problem?, Subsets?> {
 	val p = Problem(
 		name,
 		description = description,
-		type = ProblemType.Subset,
+		type = ProblemType.SUBSET,
 		variables = Variables.from(cfg.names),
 		objectiveFn = ::scoreSubsetSize,
 		solutionStringFn = stringSubset(cfg.names),
@@ -50,7 +50,7 @@ fun newNumbersSubsetProblem(name: String): Pair<Problem?, Numbers?> {
 	val p = Problem(
 		name,
 		description = description,
-		type = ProblemType.Subset,
+		type = ProblemType.SUBSET,
 		variables = Variables.from(cfg.numbers),
 		solutionStringFn = stringSubset(cfg.numbers),
 	)

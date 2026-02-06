@@ -4,14 +4,14 @@ import java.nio.file.Paths
 import kotlin.io.path.readLines
 
 private enum class Mode {
-	Outside, Inside, List, Map
+	OUTSIDE, INSIDE, LIST, MAP
 }
 
 typealias StringPair = Pair<String, String>
 typealias StringMap = Map<String, String>
 
 const val commentStart = '#'
-const val nameSeparator = '.'
+const val nameSeparator = "."
 const val entrySeparator = ':'
 const val listSeparator = "|"
 
@@ -32,7 +32,7 @@ fun load(name: String): StringMap? {
 			return null
 		}
 		var (testCase, currentKey) = listOf("", "")
-		var mode = Mode.Outside
+		var mode = Mode.OUTSIDE
 		val group: MutableList<String> = mutableListOf()
 		val data: MutableMap<String, String> = mutableMapOf()
 		for (line in lines) {
@@ -40,38 +40,38 @@ fun load(name: String): StringMap? {
 			val endsWithBracket = line.endsWith('[')
 			val isEntry = line.contains(entrySeparator)
 			when (mode) {
-				Mode.Outside if endsWithBrace -> {
+				Mode.OUTSIDE if endsWithBrace -> {
 					testCase = line.trimEnd('{').trim()
-					mode = Mode.Inside
+					mode = Mode.INSIDE
 				}
-				Mode.Inside if line == "}" -> {
+				Mode.INSIDE if line == "}" -> {
 					cacheData[Pair(problemName, testCase)] = data.toMap()
 					data.clear()
-					mode = Mode.Outside
+					mode = Mode.OUTSIDE
 				}
-				Mode.Inside if isEntry && endsWithBrace -> {
+				Mode.INSIDE if isEntry && endsWithBrace -> {
 					currentKey = line.split(entrySeparator)[0].trim()
-					mode = Mode.Map
+					mode = Mode.MAP
 				}
-				Mode.Inside if isEntry && endsWithBracket -> {
+				Mode.INSIDE if isEntry && endsWithBracket -> {
 					currentKey = line.split(entrySeparator)[0].trim()
-					mode = Mode.List
+					mode = Mode.LIST
 				}
-				Mode.Inside if isEntry -> {
+				Mode.INSIDE if isEntry -> {
 					val (key, value) = line.split(entrySeparator, limit = 2).map { it.trim() }
 					data[key] = value
 				}
-				Mode.List if line == "]" -> {
+				Mode.LIST if line == "]" -> {
 					data[currentKey] = group.joinToString(listSeparator)
 					group.clear()
-					mode = Mode.Inside
+					mode = Mode.INSIDE
 				}
-				Mode.Map if line == "}" -> {
+				Mode.MAP if line == "}" -> {
 					data[currentKey] = group.joinToString(listSeparator)
 					group.clear()
-					mode = Mode.Inside
+					mode = Mode.INSIDE
 				}
-				Mode.List, Mode.Map -> {
+				Mode.LIST, Mode.MAP -> {
 					group.add(line)
 				}
 				else -> continue
@@ -81,7 +81,7 @@ fun load(name: String): StringMap? {
 	return cacheData[mainKey]
 }
 
-fun newName(problem: String, variant: String, n: Int): String = "$problem$nameSeparator$variant$nameSeparator$n"
+fun newName(problem: String, variant: String, n: Int): String = listOf(problem, variant, n.toString()).joinToString(nameSeparator)
 
 fun String?.parseInt(): Int = this?.toIntOrNull() ?: 0
 fun String?.parseDouble(): Double = this?.toDoubleOrNull() ?: 0.0

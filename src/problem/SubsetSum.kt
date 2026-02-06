@@ -27,7 +27,7 @@ fun subsetSum(name: String): Problem? {
 		return if (p.isSatisfaction) (total == cfg.target) else (total <= cfg.target)
 	})
 
-	p.goal = Goal.Minimize
+	p.goal = Goal.MINIMIZE
 	p.objectiveFn = fun(solution: Solution): Score {
 		val total = solution.asSubset().mapList(cfg.numbers).sum()
 		return if (total > cfg.target) Inf else (cfg.target - total).toDouble()

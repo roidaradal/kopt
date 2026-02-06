@@ -29,8 +29,8 @@ fun newKnapsackProblem(name: String): Pair<Problem?, KnapsackCfg?> {
 	val p = Problem(
 		name,
 		description = description,
-		type = ProblemType.Subset,
-		goal = Goal.Maximize,
+		type = ProblemType.SUBSET,
+		goal = Goal.MAXIMIZE,
 		variables = Variables.from(cfg.items),
 		solutionStringFn = stringSubset(cfg.items),
 	)

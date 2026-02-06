@@ -3,8 +3,8 @@ package discrete
 class Problem(
     val name: String,
     val variables: List<Variable> = emptyList(),
-    var type: ProblemType = ProblemType.None,
-    var goal: Goal = Goal.None,
+    var type: ProblemType = ProblemType.NONE,
+    var goal: Goal = Goal.NONE,
     var objectiveFn: ObjectiveFn? = null,
     var solutionCoreFn: SolutionCoreFn? = null,
     var solutionStringFn: SolutionStringFn? = null,
@@ -16,13 +16,13 @@ class Problem(
     var uniformDomain: List<Value>? = null
         private set
 
-    override fun toString(): String = "<Problem: $name>" + (if(description == null) "" else "\n") +  (description ?: "")
+    override fun toString(): String = listOf("<Problem: $name>", description ?: "").joinToString("\n")
 
     val isSatisfaction: Boolean
-        get() = goal == Goal.Satisfy
+        get() = goal == Goal.SATISFY
 
     val isOptimization: Boolean
-        get() = goal == Goal.Minimize || goal == Goal.Maximize
+        get() = goal == Goal.MINIMIZE || goal == Goal.MAXIMIZE
 
     fun addVariableDomains(values: List<Value>) {
         variables.forEach { variable -> domain[variable] = values.toList() }
@@ -30,7 +30,7 @@ class Problem(
     }
 
     fun addUniversalConstraint(test: ConstraintFn) {
-        val penalty = if (goal == Goal.Maximize) -HardPenalty else HardPenalty
+        val penalty = if (goal == Goal.MAXIMIZE) -HardPenalty else HardPenalty
         addGlobalConstraint(test, penalty, variables)
     }
 
@@ -47,17 +47,17 @@ class Problem(
 }
 
 enum class Goal {
-    None,
-    Maximize,
-    Minimize,
-    Satisfy,
+    NONE,
+    MAXIMIZE,
+    MINIMIZE,
+    SATISFY,
 }
 
 enum class ProblemType {
-    None,
-    Partition,
-    Subset,
-//    Assignment,
-//    Sequence,
-//    Path,
+    NONE,
+    PARTITION,
+    SUBSET,
+//    ASSIGNMENT,
+//    SEQUENCE,
+//    PATH,
 }

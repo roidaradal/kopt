@@ -18,7 +18,7 @@ fun binPacking(name: String): Problem? {
 	val (p, cfg) = newBinPartitionProblem(name)
 	if (p == null || cfg == null) return null
 
-	p.goal = Goal.Minimize
+	p.goal = Goal.MINIMIZE
 	p.addUniversalConstraint(fun(solution: Solution): Boolean {
 		val sums = solution.partitionSums(cfg.bins, cfg.weight)
 		return sums.all { it <= cfg.capacity }

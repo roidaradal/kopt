@@ -1,3 +1,6 @@
+## v0.1.10 - Subsequence
+* **Commit**: 2026-02-06 18:27
+* problem.newSubsequence
 ## v0.1.9 - Subset Sum 
 * **Commit**: 2026-02-05 20:50
 * problem.newSubsetSum

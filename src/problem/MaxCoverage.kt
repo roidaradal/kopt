@@ -24,7 +24,7 @@ fun maxCoverage(name: String): Problem? {
 		return solution.asSubset().size <= cfg.limit
 	})
 
-	p.goal = Goal.Maximize
+	p.goal = Goal.MAXIMIZE
 	p.objectiveFn = fun(solution: Solution): Score {
 		val covered = mutableSetOf<String>()
 		for(x in solution.asSubset()) {
