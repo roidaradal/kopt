@@ -57,7 +57,7 @@ enum class ProblemType {
     NONE,
     PARTITION,
     SUBSET,
-//    ASSIGNMENT,
-//    SEQUENCE,
+    SEQUENCE,
+    ASSIGNMENT,
 //    PATH,
 }

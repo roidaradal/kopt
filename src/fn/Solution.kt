@@ -1,5 +1,6 @@
 package fn
 
+import discrete.Problem
 import discrete.Solution
 import discrete.Value
 import discrete.Variable
@@ -18,6 +19,38 @@ fun <T> Solution.partitionStrings(values: List<Value>, items: List<T>): List<Lis
 	return this.asPartition(values).map { group -> group.mapList(items).map { it.toString() } }
 }
 
-fun <T: Number>Solution.partitionSums(values: List<Value>, items: List<T>): List<Double> {
+fun <T: Number> Solution.partitionSums(values: List<Value>, items: List<T>): List<Double> {
 	return this.asPartition(values).map { group -> group.mapList(items).sumOf { it.toDouble() } }
+}
+
+fun Solution.asSequence(): List<Variable> {
+	val sequence = MutableList<Variable>(this.map.size) { 0 }
+	for((variable, idx) in this.map) {
+		sequence[idx] = variable
+	}
+	return sequence
+}
+
+fun <T> Solution.sequenceStrings(items: List<T>): List<String> {
+	return this.asSequence().map { items[it].toString() }
+}
+
+fun <T> Solution.valueStrings(p: Problem, items: List<T>?): List<String> {
+	return p.variables.map(fun(x: Variable): String {
+		val value = this.map[x] ?: return ""
+		return if (items == null) {
+			value.toString()
+		} else {
+			items[value].toString()
+		}
+	})
+}
+
+fun Solution.tallyValues(values: List<Value>): Map<Value, Int> {
+	val count: MutableMap<Value, Int> = values.associateWith { 0 }.toMutableMap()
+	for((_, value) in this.map) {
+		if (!count.containsKey(value)) continue
+		count[value] = count.getOrDefault(value, 0) + 1
+	}
+	return count
 }

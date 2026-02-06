@@ -12,5 +12,9 @@ data class Numbers(
 				target = data["target"].parseInt(),
 			)
 		}
+		fun n(name: String): Int {
+			val data = load(name) ?: return 0
+			return data["n"].parseInt()
+		}
 	}
 }

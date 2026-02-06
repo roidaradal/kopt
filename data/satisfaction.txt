@@ -1,0 +1,45 @@
+langford.3 {
+    n : 3
+}
+langford.4 {
+    n : 4
+}
+magic_series.3 {
+    n : 3
+}
+magic_series.4 {
+    n : 4
+}
+magic_series.5 {
+    n : 5
+}
+magic_series.6 {
+    n : 6
+}
+magic_series.7 {
+    n : 7
+}
+magic_series.8 {
+    n : 8
+}
+n_queens.4 {
+    n : 4
+}
+n_queens.5 {
+    n : 5
+}
+n_queens.6 {
+    n : 6
+}
+n_queens.7 {
+    n : 7
+}
+n_queens.8 {
+    n : 8
+}
+n_queens.9 {
+    n : 9
+}
+n_queens.10 {
+    n : 10
+}

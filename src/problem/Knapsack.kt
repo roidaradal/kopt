@@ -9,10 +9,10 @@ import discrete.ProblemType
 import discrete.Score
 import discrete.Solution
 import discrete.Variables
+import fn.ScoreFn
+import fn.StringFn
 import fn.asSubset
 import fn.mapList
-import fn.scoreSumWeightedValues
-import fn.stringSubset
 
 fun newKnapsack(variant: String, n: Int): Problem? {
 	val name = newName(Knapsack, variant, n)
@@ -32,7 +32,7 @@ fun newKnapsackProblem(name: String): Pair<Problem?, KnapsackCfg?> {
 		type = ProblemType.SUBSET,
 		goal = Goal.MAXIMIZE,
 		variables = Variables.from(cfg.items),
-		solutionStringFn = stringSubset(cfg.items),
+		solutionStringFn = StringFn.subset(cfg.items),
 	)
 	p.addVariableDomains(Domain.boolean())
 	p.addUniversalConstraint(fun(solution: Solution): Boolean {
@@ -47,7 +47,7 @@ fun knapsack(name: String): Problem? {
 	val (p, cfg) = newKnapsackProblem(name)
 	if (p == null || cfg == null) return null
 
-	p.objectiveFn = scoreSumWeightedValues(p.variables, cfg.value)
+	p.objectiveFn = ScoreFn.sumWeightedValues(p.variables, cfg.value)
 	return p
 }
 
@@ -57,7 +57,7 @@ fun quadraticKnapsack(name: String): Problem? {
 
 	p.description += "\nPairBonus: ${cfg.pairBonus}"
 	p.objectiveFn = fun(solution: Solution): Score {
-		val baseValue = scoreSumWeightedValues(p.variables, cfg.value).invoke(solution)
+		val baseValue = ScoreFn.sumWeightedValues(p.variables, cfg.value).invoke(solution)
 		val selected = solution.asSubset().mapList(cfg.items).toSet()
 		var bonusValue = 0.0
 		for ((pair, bonus) in cfg.pairBonus) {

@@ -1,3 +1,11 @@
+## v0.1.11 - Satisfaction
+* **Commit**: 2026-02-07 07:49
+* problem.newSatisfaction
+* CoreFn.mirroredSequence
+* CoreFn.mirroredValues
+* StringFn.sequence
+* StringFn.values
+* ConstraintFn.allUnique
 ## v0.1.10 - Subsequence
 * **Commit**: 2026-02-06 18:27
 * problem.newSubsequence

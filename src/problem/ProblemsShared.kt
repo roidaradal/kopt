@@ -7,11 +7,11 @@ import discrete.Domain
 import discrete.Problem
 import discrete.ProblemType
 import discrete.Variables
-import fn.coreSortedPartition
-import fn.scoreCountUniqueValues
-import fn.scoreSubsetSize
-import fn.stringPartition
-import fn.stringSubset
+import fn.CoreFn
+import fn.ScoreFn
+import fn.StringFn
+
+typealias IntPair = Pair<Int, Int>
 
 fun newBinPartitionProblem(name: String): Pair<Problem?, Bins?> {
 	val cfg = Bins.new(name) ?: return Pair(null, null)
@@ -21,9 +21,9 @@ fun newBinPartitionProblem(name: String): Pair<Problem?, Bins?> {
 		description = description,
 		type = ProblemType.PARTITION,
 		variables = Variables.from(cfg.weight),
-		objectiveFn = ::scoreCountUniqueValues,
-		solutionCoreFn = coreSortedPartition(cfg.bins, cfg.weight),
-		solutionStringFn = stringPartition(cfg.bins, cfg.weight),
+		objectiveFn = ScoreFn::countUniqueValues,
+		solutionCoreFn = CoreFn.sortedPartition(cfg.bins, cfg.weight),
+		solutionStringFn = StringFn.partition(cfg.bins, cfg.weight),
 	)
 	p.addVariableDomains(cfg.bins)
 	return Pair(p, cfg)
@@ -37,8 +37,8 @@ fun newSubsetsProblem(name: String): Pair<Problem?, Subsets?> {
 		description = description,
 		type = ProblemType.SUBSET,
 		variables = Variables.from(cfg.names),
-		objectiveFn = ::scoreSubsetSize,
-		solutionStringFn = stringSubset(cfg.names),
+		objectiveFn = ScoreFn::subsetSize,
+		solutionStringFn = StringFn.subset(cfg.names),
 	)
 	p.addVariableDomains(Domain.boolean())
 	return Pair(p, cfg)
@@ -52,7 +52,7 @@ fun newNumbersSubsetProblem(name: String): Pair<Problem?, Numbers?> {
 		description = description,
 		type = ProblemType.SUBSET,
 		variables = Variables.from(cfg.numbers),
-		solutionStringFn = stringSubset(cfg.numbers),
+		solutionStringFn = StringFn.subset(cfg.numbers),
 	)
 	p.addVariableDomains(Domain.boolean())
 	return Pair(p, cfg)

@@ -8,10 +8,9 @@ import discrete.Problem
 import discrete.ProblemType
 import discrete.Variables
 import discrete.Solution
+import fn.ScoreFn
+import fn.StringFn
 import fn.asSubset
-import fn.scoreSubsetSize
-import fn.scoreSumWeightedValues
-import fn.stringSubset
 
 fun newInterval(variant: String, n: Int): Problem? {
 	val name = newName(Interval, variant, n)
@@ -31,7 +30,7 @@ fun newActivitySelectionProblem(name: String): Pair<Problem?, Intervals?> {
 		type = ProblemType.SUBSET,
 		goal = Goal.MAXIMIZE,
 		variables = Variables.from(cfg.activities),
-		solutionStringFn = stringSubset(cfg.activities),
+		solutionStringFn = StringFn.subset(cfg.activities),
 	)
 	p.addVariableDomains(Domain.boolean())
 	p.addUniversalConstraint(fun(solution: Solution): Boolean {
@@ -51,7 +50,7 @@ fun activitySelection(name: String): Problem? {
 	val (p, _) = newActivitySelectionProblem(name)
 	if (p == null) return null
 
-	p.objectiveFn = ::scoreSubsetSize
+	p.objectiveFn = ScoreFn::subsetSize
 	return p
 }
 
@@ -61,6 +60,6 @@ fun weightedActivitySelection(name: String): Problem? {
 	if (cfg.activities.size != cfg.weight.size) return null
 
 	p.description += "\nWeight: ${cfg.weight}"
-	p.objectiveFn = scoreSumWeightedValues(p.variables, cfg.weight)
+	p.objectiveFn = ScoreFn.sumWeightedValues(p.variables, cfg.weight)
 	return p
 }

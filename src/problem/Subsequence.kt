@@ -5,9 +5,9 @@ import data.newName
 import discrete.Goal
 import discrete.Problem
 import discrete.Solution
+import fn.ScoreFn
 import fn.asSubset
 import fn.mapList
-import fn.scoreSubsetSize
 
 fun newSubsequence(variant: String, n: Int): Problem? {
 	val name = newName(Subsequence, variant, n)
@@ -23,7 +23,7 @@ fun newLongestSubsequenceProblem(name: String): Pair<Problem?, Numbers?> {
 	if (p == null || cfg == null) return Pair(null, null)
 
 	p.goal = Goal.MAXIMIZE
-	p.objectiveFn = ::scoreSubsetSize
+	p.objectiveFn = ScoreFn::subsetSize
 	return Pair(p, cfg)
 }
 

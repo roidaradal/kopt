@@ -9,9 +9,9 @@ import discrete.ProblemType
 import discrete.Score
 import discrete.Solution
 import discrete.Variables
-import fn.coreSortedPartition
+import fn.CoreFn
+import fn.StringFn
 import fn.partitionSums
-import fn.stringPartition
 import kotlin.math.absoluteValue
 
 fun newNumberPartition(variant: String, n: Int): Problem? {
@@ -31,8 +31,8 @@ fun numberPartition(name: String): Problem? {
 		type = ProblemType.PARTITION,
 		variables = Variables.from(cfg.numbers),
 		goal = Goal.MINIMIZE,
-		solutionCoreFn = coreSortedPartition(domain, cfg.numbers),
-		solutionStringFn = stringPartition(domain, cfg.numbers),
+		solutionCoreFn = CoreFn.sortedPartition(domain, cfg.numbers),
+		solutionStringFn = StringFn.partition(domain, cfg.numbers),
 	)
 	p.addVariableDomains(domain)
 	p.addUniversalConstraint(fun(solution: Solution): Boolean {
