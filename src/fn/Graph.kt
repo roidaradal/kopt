@@ -4,6 +4,15 @@ import data.Edge
 import data.Graph
 import data.Vertex
 
+fun Graph.isClique(vertices: List<Vertex>): Boolean {
+	val vertexSet = vertices.toSet()
+	for(vertex in vertices) {
+		val adjacent = neighborsOf(vertex) + setOf(vertex)
+		if((vertexSet - adjacent).isNotEmpty()) return false
+	}
+	return true
+}
+
 fun Graph.bfsTraversal(start: Vertex, activeEdges: Set<Edge>?): List<Vertex> {
 	val q = mutableListOf<Vertex>(start)
 	val visited = mutableSetOf<Vertex>()

@@ -4,6 +4,7 @@ import discrete.Problem
 
 const val BinCover = "bin_cover"
 const val BinPacking = "bin_packing"
+const val Clique = "clique"
 const val Interval = "interval"
 const val KCut = "k_cut"
 const val Knapsack = "knapsack"
@@ -22,6 +23,7 @@ const val VertexCover = "vertex_cover"
 val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	BinCover to ::newBinCover,
 	BinPacking to ::newBinPacking,
+	Clique to ::newClique,
 	Interval to ::newInterval,
 	KCut to ::newKCut,
 	Knapsack to ::newKnapsack,

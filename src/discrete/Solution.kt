@@ -16,4 +16,5 @@ class Solution {
 		get() = map.values.toList()
 
 	fun tuple(p: Problem): List<Value> = p.variables.map { this.map[it] ?: 0 }
+
 }
