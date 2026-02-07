@@ -14,6 +14,8 @@ fun <T> List<Int>.mapList(values: List<T>): List<T> {
 	}
 }
 
+fun <T> List<T>.isAllUnique(): Boolean = size == toSet().size
+
 fun <T> List<T>.wrapBraces(): String = "{ " + this.joinToString(separator = ", ") + " }"
 
 fun List<String>.mirroredSequence(): String {

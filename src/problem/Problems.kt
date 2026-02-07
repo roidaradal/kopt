@@ -7,6 +7,7 @@ const val BinPacking = "bin_packing"
 const val Clique = "clique"
 const val CliqueCover = "clique_cover"
 const val DominatingSet = "dominating_set"
+const val EdgeColoring = "edge_coloring"
 const val Interval = "interval"
 const val KCut = "k_cut"
 const val Knapsack = "knapsack"
@@ -28,6 +29,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	Clique to ::newClique,
 	CliqueCover to ::newCliqueCover,
 	DominatingSet to ::newDominatingSet,
+	EdgeColoring to ::newEdgeColoring,
 	Interval to ::newInterval,
 	KCut to ::newKCut,
 	Knapsack to ::newKnapsack,

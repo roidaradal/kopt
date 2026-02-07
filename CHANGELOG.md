@@ -1,4 +1,7 @@
-## v0.1.21 - Dominating Set Problems 
+## v0.1.22 - Edge Coloring 
+* **Commit**: 2026-02-07 20:31
+* problem.newEdgeColoring
+## v0.1.21 - Dominating Set 
 * **Commit**: 2026-02-07 20:05
 * problem.newDominatingSet
 ## v0.1.20 - Clique Cover 

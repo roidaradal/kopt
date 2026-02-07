@@ -8,7 +8,7 @@ class Constraint {
 	companion object {
 		fun allUnique(solution: Solution): Boolean {
 			val values = solution.values
-			return values.size == values.toSet().size
+			return values.isAllUnique()
 		}
 		fun properVertexColoring(graph: Graph): ConstraintFn {
 			return fun(solution: Solution): Boolean {
