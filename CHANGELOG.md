@@ -1,3 +1,6 @@
+## v0.1.21 - Dominating Set Problems 
+* **Commit**: 2026-02-07 20:05
+* problem.newDominatingSet
 ## v0.1.20 - Clique Cover 
 * **Commit**: 2026-02-07 16:50
 * problem.newCliqueCover

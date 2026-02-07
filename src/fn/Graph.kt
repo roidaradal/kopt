@@ -14,7 +14,7 @@ fun Graph.isClique(vertices: List<Vertex>): Boolean {
 }
 
 fun Graph.bfsTraversal(start: Vertex, activeEdges: Set<Edge>?): List<Vertex> {
-	val q = mutableListOf<Vertex>(start)
+	val q = mutableListOf(start)
 	val visited = mutableSetOf<Vertex>()
 	while (q.isNotEmpty()) {
 		val current = q.removeFirst()
