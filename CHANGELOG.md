@@ -1,3 +1,6 @@
+## v0.1.18 - K-Cut 
+* **Commit**: 2026-02-07 16:13
+* problem.newKCut
 ## v0.1.17 - Number Coloring 
 * **Commit**: 2026-02-07 14:58
 * problem.newNumberColoring

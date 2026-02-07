@@ -2,6 +2,8 @@ package data
 
 data class GraphCfg(
 	val graph: Graph,
+	val k: Int = 0,
+	val edgeWeight: List<Double> = emptyList(),
 ){
 	override fun toString(): String = graph.toString()
 
@@ -12,6 +14,8 @@ data class GraphCfg(
 			val data = load(name) ?: return null
 			return GraphCfg(
 				graph = Graph.new(data["vertices"], data["edges"], isDirected),
+				k = data["k"].parseInt(),
+				edgeWeight = data["edgeWeight"].toDoubleList(),
 			)
 		}
 	}

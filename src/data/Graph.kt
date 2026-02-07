@@ -22,6 +22,17 @@ data class Graph(
 	fun edgesOf(vertex: Vertex): List<Edge> = vertexEdges[vertex] ?: emptyList()
 	fun neighborsOf(vertex: Vertex): Set<Vertex> = vertexNeighbors[vertex] ?: emptySet()
 
+	fun activeNeighbors(vertex: Vertex, activeEdges: Set<Edge>?): List<Vertex> {
+		val neighbors = mutableSetOf<Vertex>()
+		for (edge in edgesOf(vertex)) {
+			if(activeEdges != null && !activeEdges.contains(edge)) continue
+			neighbors.add(edge.vertex1)
+			neighbors.add(edge.vertex2)
+		}
+		neighbors.remove(vertex)
+		return neighbors.toList()
+	}
+
 	fun addUndirectedEdge(v1: Vertex, v2: Vertex) = addEdge(v1, v2, false)
 	fun addDirectedEdge(v1: Vertex, v2: Vertex) = addEdge(v1, v2, true)
 
@@ -75,7 +86,6 @@ data class Edge(
 ) {
 	override fun toString(): String = "$vertex1-$vertex2"
 }
-
 
 fun newUndirectedEdge(edge: String): Edge {
 	val parts = edge.split("-").map(String::trim)
