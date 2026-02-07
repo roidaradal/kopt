@@ -1,3 +1,6 @@
+## v0.1.17 - Number Coloring 
+* **Commit**: 2026-02-07 14:58
+* problem.newNumberColoring
 ## v0.1.16 - Vertex Coloring 
 * **Commit**: 2026-02-07 14:49
 * problem.newVertexColoring 

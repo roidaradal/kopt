@@ -20,6 +20,7 @@ data class GraphCfg(
 data class GraphColoring(
 	val graph: Graph,
 	val colors: List<String> = emptyList(),
+	val numbers: List<Int> = emptyList(),
 ) {
 	override fun toString(): String = graph.toString()
 
@@ -29,6 +30,7 @@ data class GraphColoring(
 			return GraphColoring(
 				graph = Graph.undirected(data["vertices"], data["edges"]),
 				colors = data["colors"].toStringList(),
+				numbers = data["numbers"].toIntList(),
 			)
 		}
 	}
@@ -42,3 +44,5 @@ fun graphVertices(graph: Graph): List<String> = graph.vertices
 fun graphEdges(graph: Graph): List<String> = graph.edges.map { it.toString() }
 
 fun graphColors(cfg: GraphColoring): List<String> = cfg.colors
+
+fun graphNumbers(cfg: GraphColoring): List<Int> = cfg.numbers

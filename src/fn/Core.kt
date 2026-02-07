@@ -28,7 +28,7 @@ class CoreFn {
 				val core = mutableListOf<String>()
 				val lookup = mutableMapOf<Value, String>()
 				var order = 0
-				for((i, value) in values.withIndex()) {
+				for(value in values) {
 					if(!lookup.containsKey(value)) {
 						lookup[value] = order.toString()
 						order += 1

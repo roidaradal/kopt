@@ -7,6 +7,7 @@ const val BinPacking = "bin_packing"
 const val Interval = "interval"
 const val Knapsack = "knapsack"
 const val MaxCoverage = "max_coverage"
+const val NumberColoring = "number_coloring"
 const val NumberPartition = "number_partition"
 const val Satisfaction = "satisfaction"
 const val SetCover = "set_cover"
@@ -23,6 +24,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	Interval to ::newInterval,
 	Knapsack to ::newKnapsack,
 	MaxCoverage to ::newMaxCoverage,
+	NumberColoring to ::newNumberColoring,
 	NumberPartition to ::newNumberPartition,
 	Satisfaction to ::newSatisfaction,
 	SetCover to ::newSetCover,
