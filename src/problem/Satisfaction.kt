@@ -10,18 +10,39 @@ import discrete.Variables
 import fn.ConstraintFn
 import fn.CoreFn
 import fn.StringFn
+import fn.asSubset
 import fn.tallyValues
 import kotlin.math.absoluteValue
 
 fun newSatisfaction(variant: String, n: Int): Problem? {
 	val name = newName(Satisfaction, variant, n)
 	return when (variant) {
+		"exact_cover" -> exactCover(name)
 		"langford" -> langfordPair(name, n)
 		"magic_series" -> magicSeries(name, n)
 		"n_queens" -> nQueens(name, n)
 		else -> null
 	}
 }
+
+fun exactCover(name: String): Problem? {
+	val (p, cfg) = newSubsetsProblem(name)
+	if (p == null || cfg == null) return null
+
+	p.goal = Goal.SATISFY
+	p.objectiveFn = null
+	p.addUniversalConstraint(fun(solution: Solution): Boolean{
+		val count = cfg.universal.associateWith { 0 }.toMutableMap()
+		for(x in solution.asSubset()) {
+			for(item in cfg.subsets[x]) {
+				count[item] = (count[item] ?: 0) + 1
+			}
+		}
+		return count.values.all { it == 1 }
+	})
+	return p
+}
+
 
 fun langfordPair(name: String, n: Int): Problem {
 	val numPositions = n * 2

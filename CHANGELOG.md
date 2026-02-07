@@ -1,3 +1,7 @@
+## v0.1.12 - Set Cover
+* **Commit** 2026-02-07 08:45
+* problem.newSetCover
+* Add `exact_cover` to Satisfaction
 ## v0.1.11 - Satisfaction
 * **Commit**: 2026-02-07 07:49
 * problem.newSatisfaction
