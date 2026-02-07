@@ -40,6 +40,23 @@ data class GraphColoring(
 	}
 }
 
+data class GraphPartition(
+	val graph: Graph,
+	val numPartitions: Int = 0,
+) {
+	override fun toString(): String = graph.toString()
+
+	companion object {
+		fun new(name: String): GraphPartition? {
+			val data = load(name) ?: return null
+			return GraphPartition(
+				graph = Graph.undirected(data["vertices"], data["edges"]),
+				numPartitions = data["numPartitions"].parseInt(),
+			)
+		}
+	}
+}
+
 typealias GraphVariablesFn = (Graph) -> List<String>
 typealias GraphColorsFn<T> = (GraphColoring) -> List<T>
 

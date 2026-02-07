@@ -21,6 +21,7 @@ fun sumColoring(name: String): Problem? {
 	val (p, cfg) = newGraphColoringProblem(name, ::graphVertices, ::graphNumbers)
 	if(p == null || cfg == null || cfg.numbers.isEmpty()) return null
 
+	p.description += "\nNumbers: ${cfg.numbers}"
 	p.addUniversalConstraint(Constraint.properVertexColoring(cfg.graph))
 	p.objectiveFn = fun(solution: Solution): Score {
 		return solution.map.values.toList().mapList(cfg.numbers).sum().toDouble()

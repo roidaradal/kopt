@@ -4,6 +4,7 @@ import data.Bins
 import data.GraphCfg
 import data.GraphColoring
 import data.GraphColorsFn
+import data.GraphPartition
 import data.GraphVariablesFn
 import data.Numbers
 import data.Subsets
@@ -72,6 +73,24 @@ fun newGraphSubsetProblem(name: String, variablesFn: GraphVariablesFn): Pair<Pro
 		solutionStringFn = StringFn.subset(variables),
 	)
 	p.addVariableDomains(Domain.boolean())
+	return Pair(p, cfg)
+}
+
+fun newGraphPartitionProblem(name: String): Pair<Problem?, GraphPartition?> {
+	val cfg = GraphPartition.new(name) ?: return Pair(null, null)
+	val graph = cfg.graph
+	val numPartitions = if (cfg.numPartitions == 0) graph.vertices.size else cfg.numPartitions
+	val domain = Domain.range(1, numPartitions)
+	val p = Problem(
+		name,
+		description = cfg.toString(),
+		type = ProblemType.PARTITION,
+		variables = Variables.from(graph.vertices),
+		objectiveFn = ScoreFn::countUniqueValues,
+		solutionCoreFn = CoreFn.sortedPartition(domain, graph.vertices),
+		solutionStringFn = StringFn.partition(domain, graph.vertices),
+	)
+	p.addVariableDomains(domain)
 	return Pair(p, cfg)
 }
 

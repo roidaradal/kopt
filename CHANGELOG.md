@@ -1,3 +1,6 @@
+## v0.1.20 - Clique Cover 
+* **Commit**: 2026-02-07 16:50
+* problem.newCliqueCover
 ## v0.1.19 - Clique 
 * **Commit**: 2026-02-07 16:29
 * problem.newClique

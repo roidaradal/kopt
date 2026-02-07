@@ -26,6 +26,7 @@ fun newVertexColoringProblem(name: String): Pair<Problem?, GraphColoring?> {
 	val (p, cfg) = newGraphColoringProblem(name, ::graphVertices, ::graphColors)
 	if (p == null || cfg == null || cfg.colors.isEmpty()) return Pair(null, null)
 
+	p.description += "\nColors: ${cfg.colors}"
 	p.addUniversalConstraint(Constraint.properVertexColoring(cfg.graph))
 	p.objectiveFn = ScoreFn::countUniqueValues
 	p.solutionCoreFn = CoreFn.lookupValueOrder(p)
