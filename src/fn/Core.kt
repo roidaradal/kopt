@@ -21,5 +21,22 @@ class CoreFn {
 		fun <T> mirroredValues(p: Problem, items: List<T>?): SolutionCoreFn {
 			return fun(solution: Solution): String = solution.valueStrings(p, items).mirroredSequence()
 		}
+
+		fun lookupValueOrder(p: Problem): SolutionCoreFn {
+			return fun(solution: Solution): String {
+				val values = solution.tuple(p)
+				val core = mutableListOf<String>()
+				val lookup = mutableMapOf<Value, String>()
+				var order = 0
+				for((i, value) in values.withIndex()) {
+					if(!lookup.containsKey(value)) {
+						lookup[value] = order.toString()
+						order += 1
+					}
+					lookup[value]?.let { core.add(it) }
+				}
+				return core.joinToString("")
+			}
+		}
 	}
 }

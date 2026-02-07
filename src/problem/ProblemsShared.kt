@@ -2,6 +2,8 @@ package problem
 
 import data.Bins
 import data.GraphCfg
+import data.GraphColoring
+import data.GraphColorsFn
 import data.GraphVariablesFn
 import data.Numbers
 import data.Subsets
@@ -77,5 +79,20 @@ fun newGraphCoverProblem(name: String, variablesFn: GraphVariablesFn): Pair<Prob
 	val (p, cfg) = newGraphSubsetProblem(name, variablesFn)
 	if(p == null || cfg == null) return Pair(null, null)
 	p.goal = Goal.MINIMIZE
+	return Pair(p, cfg)
+}
+
+fun <T> newGraphColoringProblem(name: String, variablesFn: GraphVariablesFn, domainFn: GraphColorsFn<T>): Pair<Problem?, GraphColoring?> {
+	val cfg = GraphColoring.new(name) ?: return Pair(null, null)
+	val domain = domainFn(cfg)
+	val p = Problem(
+		name,
+		description = cfg.toString(),
+		type = ProblemType.ASSIGNMENT,
+		goal = Goal.MINIMIZE,
+		variables = Variables.from(variablesFn(cfg.graph)),
+	)
+	p.addVariableDomains(Domain.from(domain))
+	p.solutionStringFn = StringFn.values(p, domain)
 	return Pair(p, cfg)
 }

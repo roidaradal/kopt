@@ -13,8 +13,9 @@ class Problem(
 ) {
     val domain: MutableMap<Variable, List<Value>> = mutableMapOf()
     val constraints: MutableList<Constraint> = mutableListOf()
-    var uniformDomain: List<Value>? = null
-        private set
+    private var _uniformDomain: List<Value>? = null
+
+    val uniformDomain: List<Value> get() = _uniformDomain ?: emptyList()
 
     override fun toString(): String = listOf("<Problem: $name>", description ?: "").joinToString("\n")
 
@@ -26,7 +27,7 @@ class Problem(
 
     fun addVariableDomains(values: List<Value>) {
         variables.forEach { variable -> domain[variable] = values.toList() }
-        uniformDomain = values
+        _uniformDomain = values
     }
 
     fun addUniversalConstraint(test: ConstraintFn) {

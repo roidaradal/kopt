@@ -1,3 +1,9 @@
+## v0.1.16 - Vertex Coloring 
+* **Commit**: 2026-02-07 14:49
+* problem.newVertexColoring 
+* data.GraphColoring
+* ConstraintFn.properVertexColoring 
+* CoreFn.lookupValueOrder
 ## v0.1.15 - Vertex Cover 
 * **Commit**: 2026-02-07 12:29
 * problem.newVertexCover

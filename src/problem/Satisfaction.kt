@@ -9,7 +9,7 @@ import discrete.Problem
 import discrete.ProblemType
 import discrete.Solution
 import discrete.Variables
-import fn.ConstraintFn
+import fn.Constraint
 import fn.CoreFn
 import fn.StringFn
 import fn.asSequence
@@ -61,7 +61,7 @@ fun langfordPair(name: String, n: Int): Problem {
 		solutionStringFn = StringFn.sequence(numbers),
 	)
 	p.addVariableDomains(Domain.index(numPositions))
-	p.addUniversalConstraint(ConstraintFn::allUnique)
+	p.addUniversalConstraint(Constraint::allUnique)
 	p.addUniversalConstraint(fun(solution: Solution): Boolean {
 		val index = solution.map
 		for(x in 0 until numPositions step 2) {
@@ -105,7 +105,7 @@ fun nQueens(name: String, n: Int): Problem {
 		variables = Variables.range(1, n),
 	)
 	p.addVariableDomains(Domain.range(1, n))
-	p.addUniversalConstraint(ConstraintFn::allUnique)
+	p.addUniversalConstraint(Constraint::allUnique)
 	p.addUniversalConstraint(fun(solution: Solution): Boolean {
 		val row = solution.map
 		val occupied = mutableSetOf<IntPair>()

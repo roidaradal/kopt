@@ -39,6 +39,13 @@ data class Graph(
 	override fun toString(): String = "Vertices: $vertices\nEdges: $edges"
 
 	companion object {
+		fun new(vertexString: String?, edgePairString: String?, isDirected: Boolean): Graph {
+			return if(isDirected) {
+				directed(vertexString, edgePairString)
+			} else {
+				undirected(vertexString, edgePairString)
+			}
+		}
 		fun undirected(vertexString: String?, edgePairString: String?): Graph {
 			val vertices = vertexString?.spaceSplit() ?: emptyList()
 			val edgePairs = edgePairString?.spaceSplit() ?: emptyList()
