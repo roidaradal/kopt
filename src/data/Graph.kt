@@ -17,6 +17,7 @@ data class Graph(
 	}
 
 	val edges: List<Edge> get() = _edges
+	val edgeNames: List<String> get() = _edges.map { it.toString() }
 
 	fun indexOf(vertex: Vertex): Int = vertexIndex[vertex] ?: -1
 	fun edgesOf(vertex: Vertex): List<Edge> = vertexEdges[vertex] ?: emptyList()

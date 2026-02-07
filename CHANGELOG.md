@@ -1,3 +1,6 @@
+## v0.1.24 - Graph Matching
+* **Commit**: 2026-02-08 07:30
+* problem.newGraphMatching
 ## v0.1.23 - Edge Cover 
 * **Commit**: 2026-02-07 20:44
 * problem.newEdgeCover
