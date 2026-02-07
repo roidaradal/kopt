@@ -1,3 +1,6 @@
+## v0.1.23 - Edge Cover 
+* **Commit**: 2026-02-07 20:44
+* problem.newEdgeCover
 ## v0.1.22 - Edge Coloring 
 * **Commit**: 2026-02-07 20:31
 * problem.newEdgeColoring
