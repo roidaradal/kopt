@@ -23,4 +23,6 @@ data class Subsets(
 			)
 		}
 	}
+
+	override fun toString(): String = "Universal: $universal\nNames: $names\nSubsets: $subsets"
 }

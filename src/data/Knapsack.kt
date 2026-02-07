@@ -1,6 +1,6 @@
 package data
 
-data class KnapsackCfg(
+data class Knapsack(
 	val capacity: Double = 0.0,
 	val items: List<String> = emptyList(),
 	val weight: List<Double> = emptyList(),
@@ -8,7 +8,7 @@ data class KnapsackCfg(
 	val pairBonus: Map<StringPair, Double> = emptyMap(),
 ) {
 	companion object {
-		fun new(name: String): KnapsackCfg? {
+		fun new(name: String): Knapsack? {
 			val data = load(name) ?: return null
 			val pairBonus: MutableMap<StringPair, Double> = mutableMapOf()
 			for(line in data["pairBonus"].parseList()) {
@@ -17,7 +17,7 @@ data class KnapsackCfg(
 				val pair = StringPair(parts[0], parts[1])
 				pairBonus[pair] = parts[2].parseDouble()
 			}
-			return KnapsackCfg(
+			return Knapsack(
 				capacity = data["capacity"].parseDouble(),
 				items = data["items"].toStringList(),
 				weight = data["weight"].toDoubleList(),
@@ -26,4 +26,6 @@ data class KnapsackCfg(
 			)
 		}
 	}
+
+	override fun toString(): String = "Capacity: $capacity\nItems: $items\nWeight: $weight\nValue: $value"
 }

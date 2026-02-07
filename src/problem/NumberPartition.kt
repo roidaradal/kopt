@@ -23,11 +23,10 @@ fun newNumberPartition(variant: String, n: Int): Problem? {
 }
 fun numberPartition(name: String): Problem? {
 	val cfg = Numbers.new(name) ?: return null
-	val description = "Numbers: ${cfg.numbers}"
 	val domain = Domain.range(1,2)
 	val p = Problem(
 		name,
-		description = description,
+		description = cfg.toString(),
 		type = ProblemType.PARTITION,
 		variables = Variables.from(cfg.numbers),
 		goal = Goal.MINIMIZE,

@@ -11,6 +11,7 @@ const val NumberPartition = "number_partition"
 const val Satisfaction = "satisfaction"
 const val SetCover = "set_cover"
 const val SetPacking = "set_packing"
+const val SetSplitting = "set_splitting"
 const val Subsequence = "subsequence"
 const val SubsetSum = "subset_sum"
 
@@ -24,6 +25,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	Satisfaction to ::newSatisfaction,
 	SetCover to ::newSetCover,
 	SetPacking to ::newSetPacking,
+	SetSplitting to ::newSetSplitting,
 	Subsequence to ::newSubsequence,
 	SubsetSum to ::newSubsetSum,
 )

@@ -23,10 +23,9 @@ fun newInterval(variant: String, n: Int): Problem? {
 
 fun newActivitySelectionProblem(name: String): Pair<Problem?, Intervals?> {
 	val cfg = Intervals.new(name) ?: return Pair(null, null)
-	val description = "Activities: ${cfg.activities}\nStart: ${cfg.start}\nEnd: ${cfg.end}"
 	val p = Problem(
 		name,
-		description = description,
+		description = cfg.toString(),
 		type = ProblemType.SUBSET,
 		goal = Goal.MAXIMIZE,
 		variables = Variables.from(cfg.activities),

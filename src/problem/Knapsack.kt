@@ -1,6 +1,6 @@
 package problem
 
-import data.KnapsackCfg
+import data.Knapsack as KnapsackCfg
 import data.newName
 import discrete.Domain
 import discrete.Goal
@@ -25,10 +25,9 @@ fun newKnapsack(variant: String, n: Int): Problem? {
 
 fun newKnapsackProblem(name: String): Pair<Problem?, KnapsackCfg?> {
 	val cfg = KnapsackCfg.new(name) ?: return Pair(null, null)
-	val description = "Capacity: ${cfg.capacity}\nItems: ${cfg.items}\nWeight: ${cfg.weight}\nValue: ${cfg.value}"
 	val p = Problem(
 		name,
-		description = description,
+		description = cfg.toString(),
 		type = ProblemType.SUBSET,
 		goal = Goal.MAXIMIZE,
 		variables = Variables.from(cfg.items),

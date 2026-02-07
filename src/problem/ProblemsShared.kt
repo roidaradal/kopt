@@ -15,10 +15,9 @@ typealias IntPair = Pair<Int, Int>
 
 fun newBinPartitionProblem(name: String): Pair<Problem?, Bins?> {
 	val cfg = Bins.new(name) ?: return Pair(null, null)
-	val description = "Bins: ${cfg.bins}\nCapacity: ${cfg.capacity}\nWeight: ${cfg.weight}"
 	val p = Problem(
 		name,
-		description = description,
+		description = cfg.toString(),
 		type = ProblemType.PARTITION,
 		variables = Variables.from(cfg.weight),
 		objectiveFn = ScoreFn::countUniqueValues,
@@ -31,10 +30,9 @@ fun newBinPartitionProblem(name: String): Pair<Problem?, Bins?> {
 
 fun newSubsetsProblem(name: String): Pair<Problem?, Subsets?> {
 	val cfg = Subsets.new(name) ?: return Pair(null, null)
-	val description = "Universal: ${cfg.universal}\nNames: ${cfg.names}\nSubsets: ${cfg.subsets}"
 	val p = Problem(
 		name,
-		description = description,
+		description = cfg.toString(),
 		type = ProblemType.SUBSET,
 		variables = Variables.from(cfg.names),
 		objectiveFn = ScoreFn::subsetSize,
@@ -46,10 +44,9 @@ fun newSubsetsProblem(name: String): Pair<Problem?, Subsets?> {
 
 fun newNumbersSubsetProblem(name: String): Pair<Problem?, Numbers?> {
 	val cfg = Numbers.new(name) ?: return Pair(null, null)
-	val description = "Numbers: ${cfg.numbers}"
 	val p = Problem(
 		name,
-		description = description,
+		description = cfg.toString(),
 		type = ProblemType.SUBSET,
 		variables = Variables.from(cfg.numbers),
 		solutionStringFn = StringFn.subset(cfg.numbers),

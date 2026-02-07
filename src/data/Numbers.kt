@@ -17,4 +17,6 @@ data class Numbers(
 			return data["n"].parseInt()
 		}
 	}
+
+	override fun toString(): String = "Numbers: $numbers"
 }

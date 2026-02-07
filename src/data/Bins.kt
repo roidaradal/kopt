@@ -16,4 +16,6 @@ data class Bins(
 			)
 		}
 	}
+
+	override fun toString(): String = "Bins: $bins\nCapacity: $capacity\nWeight: $weight"
 }

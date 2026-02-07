@@ -1,3 +1,6 @@
+## v0.1.14 - Set Splitting 
+* **Commit**: 2026-02-07 09:29
+* problem.newSetSplitting
 ## v0.1.13 - Set Packing
 * **Commit**: 2026-02-07 08:57
 * problem.newSetPacking

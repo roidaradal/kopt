@@ -17,4 +17,6 @@ data class Intervals(
 			)
 		}
 	}
+
+	override fun toString(): String = "Activities: $activities\nStart: $start\nEnd: $end"
 }
