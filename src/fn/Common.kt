@@ -1,5 +1,11 @@
 package fn
 
+fun MutableMap<String, Int>.updateCounter(items: List<String>) {
+	for (item in items) {
+		this[item] = (this[item] ?: 0) + 1
+	}
+}
+
 fun <T> List<Int>.mapList(values: List<T>): List<T> {
 	return try {
 		this.map{ values[it] }

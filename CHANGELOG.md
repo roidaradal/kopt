@@ -1,3 +1,6 @@
+## v0.1.13 - Set Packing
+* **Commit**: 2026-02-07 08:57
+* problem.newSetPacking
 ## v0.1.12 - Set Cover
 * **Commit** 2026-02-07 08:45
 * problem.newSetCover

@@ -12,6 +12,7 @@ import fn.CoreFn
 import fn.StringFn
 import fn.asSubset
 import fn.tallyValues
+import fn.updateCounter
 import kotlin.math.absoluteValue
 
 fun newSatisfaction(variant: String, n: Int): Problem? {
@@ -33,11 +34,7 @@ fun exactCover(name: String): Problem? {
 	p.objectiveFn = null
 	p.addUniversalConstraint(fun(solution: Solution): Boolean{
 		val count = cfg.universal.associateWith { 0 }.toMutableMap()
-		for(x in solution.asSubset()) {
-			for(item in cfg.subsets[x]) {
-				count[item] = (count[item] ?: 0) + 1
-			}
-		}
+		solution.asSubset().forEach { x -> count.updateCounter(cfg.subsets[x] )}
 		return count.values.all { it == 1 }
 	})
 	return p
