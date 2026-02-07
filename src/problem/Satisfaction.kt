@@ -1,5 +1,7 @@
 package problem
 
+import data.GraphCfg
+import data.Vertex
 import data.newName
 import discrete.Domain
 import discrete.Goal
@@ -10,6 +12,7 @@ import discrete.Variables
 import fn.ConstraintFn
 import fn.CoreFn
 import fn.StringFn
+import fn.asSequence
 import fn.asSubset
 import fn.tallyValues
 import fn.updateCounter
@@ -22,6 +25,7 @@ fun newSatisfaction(variant: String, n: Int): Problem? {
 		"langford" -> langfordPair(name, n)
 		"magic_series" -> magicSeries(name, n)
 		"n_queens" -> nQueens(name, n)
+		"topological_sort" -> topologicalSort(name)
 		else -> null
 	}
 }
@@ -39,7 +43,6 @@ fun exactCover(name: String): Problem? {
 	})
 	return p
 }
-
 
 fun langfordPair(name: String, n: Int): Problem {
 	val numPositions = n * 2
@@ -149,4 +152,29 @@ fun hasDiagonalConflict(coords: IntPair, occupied: Set<IntPair>, n: Int): Boolea
 		y++; x++
 	}
 	return false
+}
+
+fun topologicalSort(name: String): Problem? {
+	val cfg = GraphCfg.directed(name) ?: return null
+	val graph = cfg.graph
+	val p = Problem(
+		name,
+		description = graph.toString(),
+		type = ProblemType.SEQUENCE,
+		goal = Goal.SATISFY,
+		variables = Variables.from(graph.vertices),
+		solutionStringFn = StringFn.sequence(graph.vertices),
+	)
+	p.addVariableDomains(Domain.index(graph.vertices.size))
+	p.addUniversalConstraint(fun(solution: Solution): Boolean {
+		val past = mutableSetOf<Vertex>()
+		for(x in solution.asSequence()) {
+			val vertex = graph.vertices[x]
+			val forward = graph.neighborsOf(vertex)
+			if (forward.intersect(past).isNotEmpty()) return false
+			past.add(vertex)
+		}
+		return true
+	})
+	return p
 }

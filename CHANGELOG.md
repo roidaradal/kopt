@@ -1,3 +1,8 @@
+## v0.1.15 - Vertex Cover 
+* **Commit**: 2026-02-07 12:29
+* problem.newVertexCover
+* data.Graph, data.Edge
+* Add `topological_sort` to Satisfaction
 ## v0.1.14 - Set Splitting 
 * **Commit**: 2026-02-07 09:29
 * problem.newSetSplitting

@@ -1,9 +1,12 @@
 package problem
 
 import data.Bins
+import data.GraphCfg
+import data.GraphVariablesFn
 import data.Numbers
 import data.Subsets
 import discrete.Domain
+import discrete.Goal
 import discrete.Problem
 import discrete.ProblemType
 import discrete.Variables
@@ -52,5 +55,27 @@ fun newNumbersSubsetProblem(name: String): Pair<Problem?, Numbers?> {
 		solutionStringFn = StringFn.subset(cfg.numbers),
 	)
 	p.addVariableDomains(Domain.boolean())
+	return Pair(p, cfg)
+}
+
+fun newGraphSubsetProblem(name: String, variablesFn: GraphVariablesFn): Pair<Problem?, GraphCfg?> {
+	val cfg = GraphCfg.undirected(name) ?: return Pair(null, null)
+	val variables = variablesFn(cfg.graph)
+	val p = Problem(
+		name,
+		description = cfg.toString(),
+		type = ProblemType.SUBSET,
+		variables = Variables.from(variables),
+		objectiveFn = ScoreFn::subsetSize,
+		solutionStringFn = StringFn.subset(variables),
+	)
+	p.addVariableDomains(Domain.boolean())
+	return Pair(p, cfg)
+}
+
+fun newGraphCoverProblem(name: String, variablesFn: GraphVariablesFn): Pair<Problem?, GraphCfg?> {
+	val (p, cfg) = newGraphSubsetProblem(name, variablesFn)
+	if(p == null || cfg == null) return Pair(null, null)
+	p.goal = Goal.MINIMIZE
 	return Pair(p, cfg)
 }

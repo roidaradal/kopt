@@ -14,6 +14,7 @@ const val SetPacking = "set_packing"
 const val SetSplitting = "set_splitting"
 const val Subsequence = "subsequence"
 const val SubsetSum = "subset_sum"
+const val VertexCover = "vertex_cover"
 
 val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	BinCover to ::newBinCover,
@@ -28,4 +29,5 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	SetSplitting to ::newSetSplitting,
 	Subsequence to ::newSubsequence,
 	SubsetSum to ::newSubsetSum,
+	VertexCover to ::newVertexCover,
 )

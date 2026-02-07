@@ -83,6 +83,8 @@ fun load(name: String): StringMap? {
 
 fun newName(problem: String, variant: String, n: Int): String = listOf(problem, variant, n.toString()).joinToString(nameSeparator)
 
+fun String.spaceSplit(): List<String> = this.trim().split("\\s+".toRegex())
+
 fun String?.parseInt(): Int = this?.toIntOrNull() ?: 0
 fun String?.parseDouble(): Double = this?.toDoubleOrNull() ?: 0.0
 
@@ -90,7 +92,7 @@ fun String?.toStringList(): List<String> {
 	return if (this.isNullOrBlank()) {
 		emptyList()
 	} else {
-		this.trim().split("\\s+".toRegex())
+		this.spaceSplit()
 	}
 }
 fun String?.toIntList(): List<Int> {
