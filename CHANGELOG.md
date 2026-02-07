@@ -1,3 +1,6 @@
+## v0.1.25 - Graph Partition 
+* **Commit**: 2026-02-08 07:44 
+* problem.newGraphPartition
 ## v0.1.24 - Graph Matching
 * **Commit**: 2026-02-08 07:30
 * problem.newGraphMatching

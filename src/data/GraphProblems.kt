@@ -45,6 +45,8 @@ data class GraphColoring(
 data class GraphPartition(
 	val graph: Graph,
 	val numPartitions: Int = 0,
+	val minSize: Int = 0,
+	val edgeWeight: List<Double> = emptyList(),
 ) {
 	override fun toString(): String = graph.toString()
 
@@ -54,6 +56,8 @@ data class GraphPartition(
 			return GraphPartition(
 				graph = Graph.undirected(data["vertices"], data["edges"]),
 				numPartitions = data["numPartitions"].parseInt(),
+				minSize = data["minSize"].parseInt(),
+				edgeWeight = data["edgeWeight"].toDoubleList(),
 			)
 		}
 	}

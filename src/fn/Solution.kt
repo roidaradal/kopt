@@ -50,7 +50,7 @@ fun Solution.tallyValues(values: List<Value>): Map<Value, Int> {
 	val count: MutableMap<Value, Int> = values.associateWith { 0 }.toMutableMap()
 	for((_, value) in this.map) {
 		if (!count.containsKey(value)) continue
-		count[value] = count.getOrDefault(value, 0) + 1
+		count[value] = (count[value] ?: 0) + 1
 	}
 	return count
 }

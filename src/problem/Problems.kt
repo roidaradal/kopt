@@ -10,6 +10,7 @@ const val DominatingSet = "dominating_set"
 const val EdgeColoring = "edge_coloring"
 const val EdgeCover = "edge_cover"
 const val GraphMatching = "graph_matching"
+const val GraphPartition = "graph_partition"
 const val Interval = "interval"
 const val KCut = "k_cut"
 const val Knapsack = "knapsack"
@@ -34,6 +35,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	EdgeColoring to ::newEdgeColoring,
 	EdgeCover to ::newEdgeCover,
 	GraphMatching to ::newGraphMatching,
+	GraphPartition to ::newGraphPartition,
 	Interval to ::newInterval,
 	KCut to ::newKCut,
 	Knapsack to ::newKnapsack,
