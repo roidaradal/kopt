@@ -15,6 +15,7 @@ const val GraphTour = "graph_tour"
 const val IndependentSet = "independent_set"
 const val InducedPath = "induced_path"
 const val Interval = "interval"
+const val KCenter = "k_center"
 const val KCut = "k_cut"
 const val Knapsack = "knapsack"
 const val MaxCoverage = "max_coverage"
@@ -43,6 +44,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	IndependentSet to ::newIndependentSet,
 	InducedPath to ::newInducedPath,
 	Interval to ::newInterval,
+	KCenter to ::newKCenter,
 	KCut to ::newKCut,
 	Knapsack to ::newKnapsack,
 	MaxCoverage to ::newMaxCoverage,

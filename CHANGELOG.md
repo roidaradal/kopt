@@ -1,3 +1,9 @@
+## v0.1.30 - Graph Path 
+* **Commit**: 
+* problem.newGraphPath
+## v0.1.29 - K-Center 
+* **Commit**: 2026-02-08 21:21
+* problem.newKCenter
 ## v0.1.28 - Graph Tour 
 * **Commit**: 2026-02-08 15:18
 * problem.newGraphTour
