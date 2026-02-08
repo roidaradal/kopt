@@ -1,3 +1,6 @@
+## v0.1.26 - Independent Set 
+* **Commit**: 2026-02-08 08:02
+* problem.newIndependentSet
 ## v0.1.25 - Graph Partition 
 * **Commit**: 2026-02-08 07:44 
 * problem.newGraphPartition

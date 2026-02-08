@@ -20,6 +20,10 @@ class Constraint {
 				}
 			}
 		}
-
+		fun isRainbowColored(colors: List<String>): ConstraintFn {
+			return fun(solution: Solution): Boolean {
+				return solution.asSubset().mapList(colors).isAllUnique()
+			}
+		}
 	}
 }

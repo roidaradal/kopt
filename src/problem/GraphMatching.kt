@@ -8,11 +8,10 @@ import discrete.Problem
 import discrete.ProblemType
 import discrete.Solution
 import discrete.Variables
+import fn.Constraint
 import fn.ScoreFn
 import fn.StringFn
 import fn.asSubset
-import fn.isAllUnique
-import fn.mapList
 
 fun newGraphMatching(variant: String, n: Int): Problem? {
 	val name = newName(GraphMatching, variant, n)
@@ -69,9 +68,7 @@ fun rainbowMatching(name: String): Problem? {
 	if(p == null || cfg == null) return null
 	val graph = cfg.graph
 	if(graph.edges.size != cfg.edgeColor.size) return null
-	p.addUniversalConstraint(fun(solution: Solution): Boolean {
-		return solution.asSubset().mapList(cfg.edgeColor).isAllUnique()
-	})
+	p.addUniversalConstraint(Constraint.isRainbowColored(cfg.edgeColor))
 	p.objectiveFn = ScoreFn::subsetSize
 	return p
 }
