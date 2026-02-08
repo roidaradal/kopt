@@ -39,3 +39,44 @@ fun Graph.connectedComponents(activeEdges: Set<Edge>?): List<List<Vertex>> {
 	}
 	return components
 }
+
+fun Graph.isEulerianPath(edges: List<Edge>): Pair<Boolean, Pair<Vertex, Vertex>> {
+	val failResult = Pair(false, Pair("", ""))
+	if (edges.size < 2) return failResult
+	val visitCount = this.edges.associateWith { 0 }.toMutableMap()
+	val (a1, b1) = edges[0]
+	val (a2, b2) = edges[1]
+	var (head, tail) = when {
+		a1 == a2 -> Pair(b1, b2)
+		a1 == b2 -> Pair(b1, a2)
+		b1 == a2 -> Pair(a1, b2)
+		b1 == b2 -> Pair(a1, a2)
+		else -> return failResult
+	}
+	visitCount.increment(edges[0])
+	visitCount.increment(edges[1])
+	for(edge in edges.subList(2, edges.size)) {
+		visitCount.increment(edge)
+		val (a, b) = edge
+		tail = when (tail) {
+			a -> b
+			b -> a
+			else -> return failResult
+		}
+	}
+	val ok = visitCount.values.all { it == 1 }
+	val pair = Pair(head, tail)
+	return Pair(ok, pair)
+}
+
+fun Graph.isHamiltonianPath(vertices: List<Vertex>): Boolean {
+	if (vertices.isEmpty()) return false
+	val visitCount = this.vertices.associateWith { 0 }.toMutableMap()
+	for ((i, curr) in vertices.withIndex()) {
+		visitCount.increment(curr)
+		if (i == vertices.lastIndex) break
+		val next = vertices[i+1]
+		if (!this.neighborsOf(curr).contains(next)) return false
+	}
+	return visitCount.values.all { it == 1 }
+}

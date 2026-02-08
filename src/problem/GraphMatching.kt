@@ -12,6 +12,7 @@ import fn.Constraint
 import fn.ScoreFn
 import fn.StringFn
 import fn.asSubset
+import fn.increment
 
 fun newGraphMatching(variant: String, n: Int): Problem? {
 	val name = newName(GraphMatching, variant, n)
@@ -39,8 +40,8 @@ fun newGraphMatchingProblem(name: String): Pair<Problem?, GraphCfg?> {
 		val count = mutableMapOf<String, Int>()
 		for(x in solution.asSubset()) {
 			val (v1, v2) = graph.edges[x]
-			count[v1] = (count[v1] ?: 0) + 1
-			count[v2] = (count[v2] ?: 0) + 1
+			count.increment(v1)
+			count.increment(v2)
 		}
 		return count.values.all { it == 1}
 	})

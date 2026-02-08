@@ -1,3 +1,10 @@
+## v0.1.28 - Graph Tour 
+* **Commit**: 2026-02-08 15:18
+* problem.newGraphTour
+* StringFn.eulerianPath
+* CoreFn.sortedCycle
+* Graph.isEulerianPath
+* Graph.isHamiltonianPath
 ## v0.1.27 - Induced Path 
 * **Commit**: 2026-02-08 08:33
 * problem.newInducedPath

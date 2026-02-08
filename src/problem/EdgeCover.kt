@@ -5,6 +5,7 @@ import data.newName
 import discrete.Problem
 import discrete.Solution
 import fn.asSubset
+import fn.increment
 
 fun newEdgeCover(variant: String, n: Int): Problem? {
 	val name = newName(EdgeCover, variant, n)
@@ -22,8 +23,8 @@ fun edgeCover(name: String): Problem? {
 		val count = graph.vertices.associateWith { 0 }.toMutableMap()
 		for(x in solution.asSubset()) {
 			val (v1, v2) = graph.edges[x]
-			count[v1] = (count[v1] ?: 0) + 1
-			count[v2] = (count[v2] ?: 0) + 1
+			count.increment(v1)
+			count.increment(v2)
 		}
 		return count.values.all { it > 0 }
 	})

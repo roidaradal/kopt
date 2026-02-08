@@ -14,6 +14,12 @@ class CoreFn {
 			}
 		}
 
+		fun <T> sortedCycle(items: List<T>): SolutionCoreFn {
+			return fun(solution: Solution): String {
+				return solution.sequenceStrings(items).sortedCycle(false)
+			}
+		}
+
 		fun <T> mirroredSequence(items: List<T>): SolutionCoreFn {
 			return fun(solution: Solution): String = solution.sequenceStrings(items).mirroredItems()
 		}

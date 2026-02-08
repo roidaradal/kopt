@@ -11,6 +11,7 @@ import discrete.Solution
 import fn.Constraint
 import fn.CoreFn
 import fn.ScoreFn
+import fn.increment
 
 fun newVertexColoring(variant: String, n: Int): Problem? {
 	val name = newName(VertexColoring, variant, n)
@@ -56,7 +57,7 @@ fun completeColoring(name: String): Problem? {
 			val c2 = color[graph.indexOf(v2)] ?: return false
 			var key = IntPair(c1, c2)
 			if (!count.containsKey(key)) key = IntPair(c2, c1)
-			count[key] = (count[key] ?: 0) + 1
+			count.increment(key)
 		}
 		return count.values.all { it >= 1 }
 	})
@@ -75,8 +76,7 @@ fun harmoniousColoring(name: String): Problem? {
 			val c1 = color[graph.indexOf(v1)] ?: return false
 			val c2 = color[graph.indexOf(v2)] ?: return false
 			val colors = listOf(c1, c2).sorted()
-			val key = IntPair(colors[0], colors[1])
-			count[key] = (count[key] ?: 0) + 1
+			count.increment(IntPair(colors[0], colors[1]))
 		}
 		return count.values.all {it <= 1}
 	})
