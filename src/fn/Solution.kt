@@ -15,6 +15,16 @@ fun Solution.asPartition(values: List<Value>): List<List<Variable>> {
 
 fun Solution.asSubset(): List<Variable> = this.map.filter{ (_, value) -> value == 1 }.map { (variable, _) -> variable}
 
+fun Solution.asPathOrder(): List<Variable> {
+	val length = values.max() + 1
+	val path = MutableList(length) { -1 }
+	for((idx, order) in this.map) {
+		if(order < 0) continue
+		path[order] = idx
+	}
+	return path
+}
+
 fun <T> Solution.partitionStrings(values: List<Value>, items: List<T>): List<List<String>> {
 	return this.asPartition(values).map { group -> group.mapList(items).map { it.toString() } }
 }

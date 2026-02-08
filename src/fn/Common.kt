@@ -18,12 +18,12 @@ fun <T> List<T>.isAllUnique(): Boolean = size == toSet().size
 
 fun <T> List<T>.wrapBraces(): String = "{ " + this.joinToString(separator = ", ") + " }"
 
-fun List<String>.mirroredSequence(): String {
+fun List<String>.mirroredItems(separator: String = " "): String {
 	if (isEmpty()) return ""
 	return if (first() > last()) {
-		reversed().joinToString(" ")
+		reversed().joinToString(separator)
 	} else {
-		joinToString(" ")
+		joinToString(separator)
 	}
 }
 

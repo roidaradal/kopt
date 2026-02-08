@@ -16,5 +16,6 @@ class Domain {
 		fun boolean(): List<Value> = listOf(1, 0)
 		fun range(first: Int, last: Int): List<Value> = (first..last).toList()
 		fun index(numItems: Int): List<Value> = (0 until numItems).toList()
+		fun path(numItems: Int): List<Value> = index(numItems) + listOf(-1)
 	}
 }

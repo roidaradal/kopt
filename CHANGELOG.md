@@ -1,3 +1,6 @@
+## v0.1.27 - Induced Path 
+* **Commit**: 2026-02-08 08:33
+* problem.newInducedPath
 ## v0.1.26 - Independent Set 
 * **Commit**: 2026-02-08 08:02
 * problem.newIndependentSet

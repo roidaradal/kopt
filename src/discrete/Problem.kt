@@ -60,5 +60,5 @@ enum class ProblemType {
     SUBSET,
     SEQUENCE,
     ASSIGNMENT,
-//    PATH,
+    PATH,
 }

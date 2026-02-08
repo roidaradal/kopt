@@ -15,11 +15,11 @@ class CoreFn {
 		}
 
 		fun <T> mirroredSequence(items: List<T>): SolutionCoreFn {
-			return fun(solution: Solution): String = solution.sequenceStrings(items).mirroredSequence()
+			return fun(solution: Solution): String = solution.sequenceStrings(items).mirroredItems()
 		}
 
 		fun <T> mirroredValues(p: Problem, items: List<T>?): SolutionCoreFn {
-			return fun(solution: Solution): String = solution.valueStrings(p, items).mirroredSequence()
+			return fun(solution: Solution): String = solution.valueStrings(p, items).mirroredItems()
 		}
 
 		fun lookupValueOrder(p: Problem): SolutionCoreFn {

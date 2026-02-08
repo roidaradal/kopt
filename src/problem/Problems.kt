@@ -12,6 +12,7 @@ const val EdgeCover = "edge_cover"
 const val GraphMatching = "graph_matching"
 const val GraphPartition = "graph_partition"
 const val IndependentSet = "independent_set"
+const val InducedPath = "induced_path"
 const val Interval = "interval"
 const val KCut = "k_cut"
 const val Knapsack = "knapsack"
@@ -38,6 +39,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	GraphMatching to ::newGraphMatching,
 	GraphPartition to ::newGraphPartition,
 	IndependentSet to ::newIndependentSet,
+	InducedPath to ::newInducedPath,
 	Interval to ::newInterval,
 	KCut to ::newKCut,
 	Knapsack to ::newKnapsack,
