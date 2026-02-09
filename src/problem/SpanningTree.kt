@@ -1,13 +1,10 @@
 package problem
 
-import data.GraphCfg
-import data.graphEdges
 import data.newName
-import discrete.Goal
+import data.spanVertices
 import discrete.Problem
 import discrete.Score
 import discrete.Solution
-import fn.Constraint
 import fn.asSubset
 import fn.increment
 import fn.mapList
@@ -23,26 +20,13 @@ fun newSpanningTree(variant: String, n: Int): Problem? {
 	}
 }
 
-fun newSpanningTreeProblem(name: String): Pair<Problem?, GraphCfg?> {
-	val (p, cfg) = newGraphSubsetProblem(name, ::graphEdges)
-	if (p == null || cfg == null) {
-		return Pair(null, null)
-	}
-	val graph = cfg.graph
-
-	p.addUniversalConstraint(Constraint.allVerticesCovered(graph, graph.vertices))
-	p.addUniversalConstraint(Constraint.spanningTree(graph, graph.vertices))
-	p.goal = Goal.MINIMIZE
-	return Pair(p, cfg)
-}
-
 fun minimumSpanningTree(name: String): Problem? {
-	val (p, cfg) = newSpanningTreeProblem(name)
+	val (p, cfg) = newSpanningTreeProblem(name, ::spanVertices)
 	return edgeWeightedProblem(p, cfg)
 }
 
 fun minDegreeSpanningTree(name: String): Problem? {
-	val (p, cfg) = newSpanningTreeProblem(name)
+	val (p, cfg) = newSpanningTreeProblem(name, ::spanVertices)
 	if (p == null || cfg == null) {
 		return null
 	}
@@ -60,7 +44,7 @@ fun minDegreeSpanningTree(name: String): Problem? {
 }
 
 fun kMinimumSpanningTree(name: String): Problem? {
-	val (problem, cfg) = newSpanningTreeProblem(name)
+	val (problem, cfg) = newSpanningTreeProblem(name, ::spanVertices)
 	val p = edgeWeightedProblem(problem, cfg)
 	if (p == null || cfg == null || cfg.k == 0) return null
 	val graph = cfg.graph

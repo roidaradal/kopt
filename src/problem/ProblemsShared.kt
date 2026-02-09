@@ -5,14 +5,17 @@ import data.GraphCfg
 import data.GraphColoring
 import data.GraphColorsFn
 import data.GraphPartition
+import data.GraphSpanFn
 import data.GraphVariablesFn
 import data.Numbers
 import data.Subsets
+import data.graphEdges
 import discrete.Domain
 import discrete.Goal
 import discrete.Problem
 import discrete.ProblemType
 import discrete.Variables
+import fn.Constraint
 import fn.CoreFn
 import fn.ScoreFn
 import fn.StringFn
@@ -116,6 +119,19 @@ fun <T> newGraphColoringProblem(name: String, variablesFn: GraphVariablesFn, dom
 	return Pair(p, cfg)
 }
 
+fun newSpanningTreeProblem(name: String, spanFn: GraphSpanFn): Pair<Problem?, GraphCfg?> {
+	val (p, cfg) = newGraphSubsetProblem(name, ::graphEdges)
+	if (p == null || cfg == null) {
+		return Pair(null, null)
+	}
+	val graph = cfg.graph
+	val vertices = spanFn(cfg)
+	p.addUniversalConstraint(Constraint.allVerticesCovered(graph, vertices))
+	p.addUniversalConstraint(Constraint.spanningTree(graph, vertices))
+	p.goal = Goal.MINIMIZE
+	return Pair(p, cfg)
+}
+
 fun edgeWeightedProblem(p: Problem?, cfg: GraphCfg?): Problem? {
 	if(p == null || cfg == null) return null
 	val graph = cfg.graph
@@ -124,3 +140,4 @@ fun edgeWeightedProblem(p: Problem?, cfg: GraphCfg?): Problem? {
 	p.objectiveFn = ScoreFn.sumWeightedValues(p.variables, cfg.edgeWeight)
 	return p
 }
+

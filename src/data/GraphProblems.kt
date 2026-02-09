@@ -6,6 +6,7 @@ data class GraphCfg(
 	val edgeWeight: List<Double> = emptyList(),
 	val edgeColor: List<String> = emptyList(),
 	val vertexColor: List<String> = emptyList(),
+	val terminals: List<String> = emptyList(),
 ){
 	override fun toString(): String = graph.toString()
 
@@ -20,6 +21,7 @@ data class GraphCfg(
 				edgeWeight = data["edgeWeight"].toDoubleList(),
 				edgeColor = data["edgeColor"].toStringList(),
 				vertexColor = data["vertexColor"].toStringList(),
+				terminals = data["terminals"].toStringList(),
 			)
 		}
 	}
@@ -66,6 +68,7 @@ data class GraphPartition(
 }
 
 typealias GraphVariablesFn = (Graph) -> List<String>
+typealias GraphSpanFn = (GraphCfg) -> List<String>
 typealias GraphColorsFn<T> = (GraphColoring) -> List<T>
 
 fun graphVertices(graph: Graph): List<String> = graph.vertices
@@ -75,3 +78,7 @@ fun graphEdges(graph: Graph): List<String> = graph.edges.map { it.toString() }
 fun graphColors(cfg: GraphColoring): List<String> = cfg.colors
 
 fun graphNumbers(cfg: GraphColoring): List<Int> = cfg.numbers
+
+fun spanVertices(cfg: GraphCfg): List<String> = cfg.graph.vertices
+
+fun spanTerminals(cfg: GraphCfg): List<String> = cfg.terminals
