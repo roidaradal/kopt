@@ -115,3 +115,12 @@ fun <T> newGraphColoringProblem(name: String, variablesFn: GraphVariablesFn, dom
 	p.solutionStringFn = StringFn.values(p, domain)
 	return Pair(p, cfg)
 }
+
+fun edgeWeightedProblem(p: Problem?, cfg: GraphCfg?): Problem? {
+	if(p == null || cfg == null) return null
+	val graph = cfg.graph
+	if(graph.edges.size != cfg.edgeWeight.size) return null
+	p.description += "\nWeight: ${cfg.edgeWeight}"
+	p.objectiveFn = ScoreFn.sumWeightedValues(p.variables, cfg.edgeWeight)
+	return p
+}

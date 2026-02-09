@@ -57,11 +57,7 @@ fun maxCardinalityMatching(name: String): Problem? {
 
 fun maxWeightMatching(name: String): Problem? {
 	val (p, cfg) = newGraphMatchingProblem(name)
-	if(p == null || cfg == null) return null
-	val graph = cfg.graph
-	if(graph.edges.size != cfg.edgeWeight.size) return null
-	p.objectiveFn = ScoreFn.sumWeightedValues(p.variables, cfg.edgeWeight)
-	return p
+	return edgeWeightedProblem(p, cfg)
 }
 
 fun rainbowMatching(name: String): Problem? {

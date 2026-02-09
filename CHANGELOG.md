@@ -1,6 +1,10 @@
-## v0.1.30 - Graph Path 
-* **Commit**: 
-* problem.newGraphPath
+## TODO 
+* Graph Path 
+## v0.1.30 - Spanning Tree
+* **Commit**: 2026-02-09 21:45
+* problem.newSpanningTree
+* Constraint.allVerticesCovered
+* Constraint.spanningTree
 ## v0.1.29 - K-Center 
 * **Commit**: 2026-02-08 21:21
 * problem.newKCenter

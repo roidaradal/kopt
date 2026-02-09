@@ -1,5 +1,7 @@
 package fn
 
+import data.Graph
+import data.Vertex
 import discrete.Problem
 import discrete.Solution
 import discrete.Value
@@ -63,4 +65,12 @@ fun Solution.tallyValues(values: List<Value>): Map<Value, Int> {
 		count.increment(value)
 	}
 	return count
+}
+
+fun Solution.spannedVertices(graph: Graph): Set<Vertex>? {
+	val edges = asSubset().mapList(graph.edges)
+	if (edges.isEmpty()) return null
+	val activeEdges = edges.toSet()
+	val start = edges[0].vertex1
+	return graph.bfsTraversal(start, activeEdges).toSet()
 }

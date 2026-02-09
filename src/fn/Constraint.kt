@@ -1,6 +1,7 @@
 package fn
 
 import data.Graph
+import data.Vertex
 import discrete.ConstraintFn
 import discrete.Solution
 
@@ -23,6 +24,23 @@ class Constraint {
 		fun isRainbowColored(colors: List<String>): ConstraintFn {
 			return fun(solution: Solution): Boolean {
 				return solution.asSubset().mapList(colors).isAllUnique()
+			}
+		}
+		fun allVerticesCovered(graph: Graph, vertices: List<Vertex>): ConstraintFn {
+			return fun(solution: Solution): Boolean {
+				val covered = vertices.associateWith { false }.toMutableMap()
+				for (x in solution.asSubset()) {
+					val (v1, v2) = graph.edges[x]
+					covered[v1] = true
+					covered[v2] = true
+				}
+				return covered.values.all { it }
+			}
+		}
+		fun spanningTree(graph: Graph, vertices: List<Vertex>): ConstraintFn {
+			return fun(solution: Solution): Boolean {
+				val reachable = solution.spannedVertices(graph) ?: return false
+				return (vertices.toSet() - reachable).isEmpty()
 			}
 		}
 	}

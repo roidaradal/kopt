@@ -25,6 +25,7 @@ const val Satisfaction = "satisfaction"
 const val SetCover = "set_cover"
 const val SetPacking = "set_packing"
 const val SetSplitting = "set_splitting"
+const val SpanningTree = "spanning_tree"
 const val Subsequence = "subsequence"
 const val SubsetSum = "subset_sum"
 const val VertexColoring = "vertex_coloring"
@@ -54,6 +55,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	SetCover to ::newSetCover,
 	SetPacking to ::newSetPacking,
 	SetSplitting to ::newSetSplitting,
+	SpanningTree to ::newSpanningTree,
 	Subsequence to ::newSubsequence,
 	SubsetSum to ::newSubsetSum,
 	VertexColoring to ::newVertexColoring,

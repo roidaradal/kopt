@@ -3,9 +3,7 @@ package problem
 import data.graphEdges
 import data.newName
 import discrete.Problem
-import discrete.Solution
-import fn.asSubset
-import fn.increment
+import fn.Constraint
 
 fun newEdgeCover(variant: String, n: Int): Problem? {
 	val name = newName(EdgeCover, variant, n)
@@ -19,14 +17,6 @@ fun edgeCover(name: String): Problem? {
 	val (p, cfg) = newGraphCoverProblem(name, ::graphEdges)
 	if (p == null || cfg == null) return null
 	val graph = cfg.graph
-	p.addUniversalConstraint(fun(solution: Solution): Boolean {
-		val count = graph.vertices.associateWith { 0 }.toMutableMap()
-		for(x in solution.asSubset()) {
-			val (v1, v2) = graph.edges[x]
-			count.increment(v1)
-			count.increment(v2)
-		}
-		return count.values.all { it > 0 }
-	})
+	p.addUniversalConstraint(Constraint.allVerticesCovered(graph, graph.vertices))
 	return p
 }
