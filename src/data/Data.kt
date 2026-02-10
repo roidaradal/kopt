@@ -1,5 +1,6 @@
 package data
 
+import discrete.Inf
 import java.nio.file.Paths
 import kotlin.io.path.readLines
 
@@ -87,6 +88,7 @@ fun String.spaceSplit(): List<String> = this.trim().split("\\s+".toRegex())
 
 fun String?.parseInt(): Int = this?.toIntOrNull() ?: 0
 fun String?.parseDouble(): Double = this?.toDoubleOrNull() ?: 0.0
+fun String.parseDoubleInf(): Double = if (this.lowercase() == "x") Inf else this.parseDouble()
 
 fun String?.toStringList(): List<String> {
 	return if (this.isNullOrBlank()) {
@@ -126,4 +128,9 @@ fun String?.parseMap(): StringMap {
 			Pair(key, value)
 		}
 	}
+}
+
+fun String.matrixRow(removeFirst: Boolean): List<Double> {
+	val start = if (removeFirst) 1 else 0
+	return this.spaceSplit().drop(start).map(String::parseDoubleInf)
 }

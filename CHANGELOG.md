@@ -1,5 +1,9 @@
 ## TODO 
 * Graph Path 
+## v0.1.32 - Traveling Salesman 
+* **Commit**: 2026-02-10 21:35
+* problem.newTravelingSalesman
+* data.GraphPath 
 ## v0.1.31 - Steiner Tree
 * **Commit**: 2026-02-09 22:23
 * problem.newSteinerTree

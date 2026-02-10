@@ -29,6 +29,7 @@ const val SpanningTree = "spanning_tree"
 const val SteinerTree = "steiner_tree"
 const val Subsequence = "subsequence"
 const val SubsetSum = "subset_sum"
+const val TravelingSalesman = "traveling_salesman"
 const val VertexColoring = "vertex_coloring"
 const val VertexCover = "vertex_cover"
 
@@ -60,6 +61,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	SteinerTree to ::newSteinerTree,
 	Subsequence to ::newSubsequence,
 	SubsetSum to ::newSubsetSum,
+	TravelingSalesman to ::newTravelingSalesman,
 	VertexColoring to ::newVertexColoring,
 	VertexCover to ::newVertexCover,
 )
