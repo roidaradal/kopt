@@ -26,7 +26,7 @@ fun newTravelingSalesman(variant: String, n: Int): Problem? {
 }
 
 fun newTravelingSalesmanProblem(name: String): Pair<Problem?, GraphPath?> {
-	val cfg = GraphPath.new(name) ?: return Pair(null, null)
+	val cfg = GraphPath.tour(name) ?: return Pair(null, null)
 	val p = Problem(
 		name,
 		description = cfg.toString(),

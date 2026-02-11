@@ -69,21 +69,32 @@ data class GraphPartition(
 
 data class GraphPath(
 	val vertices: List<Vertex> = emptyList(),
+	val items: List<String> = emptyList(),
 	val distance: List<List<Double>> = emptyList(),
+	val cost: List<List<Double>> = emptyList(),
+	val fromOrigin: List<Double> = emptyList(),
+	val toOrigin: List<Double> = emptyList(),
 ) {
 	override fun toString(): String = "Vertices: $vertices\nDistance: $distance"
 
 	companion object {
-		fun new(name: String): GraphPath? {
+		fun tour(name: String): GraphPath? {
 			val data = load(name) ?: return null
-			val vertexList = data["vertices"].toStringList()
 			val distanceMatrix = mutableListOf<List<Double>>()
 			for(line in data["distance"].parseList()) {
 				distanceMatrix.add(line.matrixRow(true))
 			}
+			val costMatrix = mutableListOf<List<Double>>()
+			for(line in data["cost"].parseList()) {
+				costMatrix.add(line.matrixRow(true))
+			}
 			return GraphPath(
-				vertices = vertexList,
+				vertices = data["vertices"].toStringList(),
+				items = data["items"].toStringList(),
 				distance = distanceMatrix,
+				cost = costMatrix,
+				fromOrigin = data["fromOrigin"].toDoubleList(),
+				toOrigin = data["toOrigin"].toDoubleList(),
 			)
 		}
 	}

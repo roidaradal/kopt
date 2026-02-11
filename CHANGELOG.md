@@ -1,5 +1,8 @@
 ## TODO 
 * Graph Path 
+## v0.1.33 - Traveling Purchaser 
+* **Commit**: 2026-02-11 21:12
+* problem.newTravelingPurchaser
 ## v0.1.32 - Traveling Salesman 
 * **Commit**: 2026-02-10 21:35
 * problem.newTravelingSalesman
