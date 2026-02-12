@@ -5,6 +5,7 @@ import discrete.Problem
 const val BinCover = "bin_cover"
 const val BinPacking = "bin_packing"
 const val CarPainting = "car_painting"
+const val CarSequencing = "car_sequencing"
 const val Clique = "clique"
 const val CliqueCover = "clique_cover"
 const val DominatingSet = "dominating_set"
@@ -39,6 +40,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	BinCover to ::newBinCover,
 	BinPacking to ::newBinPacking,
 	CarPainting to ::newCarPainting,
+	CarSequencing to ::newCarSequencing,
 	Clique to ::newClique,
 	CliqueCover to ::newCliqueCover,
 	DominatingSet to ::newDominatingSet,
