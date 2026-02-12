@@ -1,5 +1,10 @@
 ## TODO 
 * Graph Path 
+## v0.1.34 - Car Painting 
+* **Commit**: 2026-02-12 21:12
+* problem.newCarPainting
+* data.Cars
+* fn.CountColorChanges
 ## v0.1.33 - Traveling Purchaser 
 * **Commit**: 2026-02-11 21:12
 * problem.newTravelingPurchaser

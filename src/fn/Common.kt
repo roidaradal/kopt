@@ -37,3 +37,13 @@ fun List<String>.sortedCycle(removeTail: Boolean): String {
 }
 
 fun sortedPartitionGroups(groups: List<List<String>>): List<String> = groups.map { it.sorted().wrapBraces() }
+
+fun <T> countColorChanges(colorSequence: List<T>): Int {
+	var prevColor = colorSequence.first()
+	var changes = 0
+	for((i, currColor) in colorSequence.withIndex()) {
+		if(i > 0 && prevColor != currColor) changes += 1
+		prevColor = currColor
+	}
+	return changes
+}
