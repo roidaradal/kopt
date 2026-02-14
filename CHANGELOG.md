@@ -1,5 +1,9 @@
 ## TODO 
 * Graph Path  
+## v0.1.36 - Warehouse Location 
+* **Commit**: 2026-02-14 08:45
+* problem.newWarehouseLocation 
+* data.Warehouse
 ## v0.1.35 - Car Sequencing
 * **Commit**: 2026-02-13 06:25
 * problem.newCarSequencing 

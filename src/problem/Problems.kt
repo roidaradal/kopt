@@ -35,6 +35,7 @@ const val TravelingPurchaser = "traveling_purchaser"
 const val TravelingSalesman = "traveling_salesman"
 const val VertexColoring = "vertex_coloring"
 const val VertexCover = "vertex_cover"
+const val WarehouseLocation = "warehouse_location"
 
 val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	BinCover to ::newBinCover,
@@ -70,4 +71,5 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	TravelingSalesman to ::newTravelingSalesman,
 	VertexColoring to ::newVertexColoring,
 	VertexCover to ::newVertexCover,
+	WarehouseLocation to ::newWarehouseLocation,
 )
