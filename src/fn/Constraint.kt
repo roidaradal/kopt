@@ -1,8 +1,10 @@
 package fn
 
 import data.Graph
+import data.GraphPath
 import data.Vertex
 import discrete.ConstraintFn
+import discrete.Inf
 import discrete.Solution
 
 class Constraint {
@@ -41,6 +43,21 @@ class Constraint {
 			return fun(solution: Solution): Boolean {
 				val reachable = solution.spannedVertices(graph) ?: return false
 				return (vertices.toSet() - reachable).isEmpty()
+			}
+		}
+		fun simplePath(cfg: GraphPath): ConstraintFn {
+			return fun(solution: Solution): Boolean {
+				val path = solution.asGraphPath(cfg)
+				var prev = path[0]
+				val visited = mutableSetOf(prev)
+				for(i in 1 until path.size) {
+					val curr = path[i]
+					if (visited.contains(curr)) return false
+					if (cfg.distance[prev][curr] == Inf) return false
+					visited.add(curr)
+					prev = curr
+				}
+				return true
 			}
 		}
 	}

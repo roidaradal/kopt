@@ -1,5 +1,6 @@
 package fn
 
+import data.GraphPath
 import discrete.ObjectiveFn
 import discrete.Score
 import discrete.Solution
@@ -15,6 +16,12 @@ class ScoreFn {
 			return fun(solution: Solution): Score {
 				val count = solution.map
 				return variables.sumOf { (count[it] ?: 0) * weight[it] }
+			}
+		}
+
+		fun pathCost(cfg: GraphPath): ObjectiveFn {
+			return fun(solution: Solution): Score {
+				return solution.pathDistances(cfg).sum()
 			}
 		}
 	}

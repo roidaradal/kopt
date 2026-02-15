@@ -1,6 +1,7 @@
 package fn
 
 import data.Graph
+import data.GraphPath
 import data.Vertex
 import discrete.Problem
 import discrete.Solution
@@ -16,6 +17,18 @@ fun Solution.asPartition(values: List<Value>): List<List<Variable>> {
 }
 
 fun Solution.asSubset(): List<Variable> = this.map.filter{ (_, value) -> value == 1 }.map { (variable, _) -> variable}
+
+fun Solution.asGraphPath(cfg: GraphPath): List<Int> {
+	val length = this.values.max() + 1
+	val path = MutableList(length) { 0 }
+	for((variable, idx) in this.map) {
+		if(idx < 0) continue
+		path[idx] = cfg.originalIndex[variable] ?: continue
+	}
+	path.addFirst(cfg.start)
+	path.addLast(cfg.end)
+	return path
+}
 
 fun Solution.asPathOrder(): List<Variable> {
 	val length = values.max() + 1
@@ -73,4 +86,16 @@ fun Solution.spannedVertices(graph: Graph): Set<Vertex>? {
 	val activeEdges = edges.toSet()
 	val start = edges[0].vertex1
 	return graph.bfsTraversal(start, activeEdges).toSet()
+}
+
+fun Solution.pathDistances(cfg: GraphPath): List<Double> {
+	val distances = mutableListOf<Double>()
+	val path = asGraphPath(cfg)
+	var prev = path[0]
+	for(i in 1 until path.size) {
+		val curr = path[i]
+		distances.add(cfg.distance[prev][curr])
+		prev = curr
+	}
+	return distances
 }

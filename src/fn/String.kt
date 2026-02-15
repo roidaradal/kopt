@@ -1,6 +1,7 @@
 package fn
 
 import data.Graph
+import data.GraphPath
 import data.Vertex
 import discrete.Problem
 import discrete.Solution
@@ -34,6 +35,12 @@ class StringFn {
 		fun <T> values(p: Problem, items: List<T>?): SolutionStringFn {
 			return fun(solution: Solution): String {
 				return solution.valueStrings(p, items).joinToString(" ")
+			}
+		}
+
+		fun graphPath(cfg: GraphPath): SolutionStringFn {
+			return fun(solution: Solution): String {
+				return solution.asGraphPath(cfg).mapList(cfg.vertices).joinToString("-")
 			}
 		}
 

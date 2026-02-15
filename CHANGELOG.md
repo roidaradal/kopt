@@ -1,5 +1,11 @@
-## TODO 
-* Graph Path  
+## v0.1.38 - Graph Path 
+* **Commit**: 2026-02-15 12:56
+* problem.newGraphPath
+* data.GraphPath.new
+* Constraint.simplePath 
+* StringFn.graphPath
+* ScoreFn.pathCost
+* fn.PathDistances
 ## v0.1.37 - Allocation 
 * **Commit**: 2026-02-15 11:34
 * problem.newAllocation

@@ -68,9 +68,13 @@ data class GraphPartition(
 }
 
 data class GraphPath(
+	val start: Int = 0,
+	val end: Int = 0,
+	val originalIndex: Map<Int, Int> = emptyMap(),
 	val vertices: List<Vertex> = emptyList(),
-	val items: List<String> = emptyList(),
+	val between: List<Vertex> = emptyList(),
 	val distance: List<List<Double>> = emptyList(),
+	val items: List<String> = emptyList(),
 	val cost: List<List<Double>> = emptyList(),
 	val fromOrigin: List<Double> = emptyList(),
 	val toOrigin: List<Double> = emptyList(),
@@ -78,6 +82,37 @@ data class GraphPath(
 	override fun toString(): String = "Vertices: $vertices\nDistance: $distance"
 
 	companion object {
+		fun new(name: String) : GraphPath? {
+			val data = load(name) ?: return null
+			val vertices = data["vertices"].toStringList()
+			val startVertex = data["start"] ?: return null
+			val endVertex = data["end"] ?: return null
+			val startIndex = vertices.indexOf(startVertex)
+			val endIndex = vertices.indexOf(endVertex)
+			if (startIndex < 0 || endIndex < 0) return null
+			val distanceMatrix = mutableListOf<List<Double>>()
+			for(line in data["distance"].parseList()) {
+				distanceMatrix.add(line.matrixRow(true))
+			}
+			val originalIndex = mutableMapOf<Int, Int>()
+			val between = mutableListOf<Vertex>()
+			var betweenIdx = 0
+			for((i, vertex) in vertices.withIndex()) {
+				if(i == startIndex || i == endIndex) continue
+				between.add(vertex)
+				originalIndex[betweenIdx] = i
+				betweenIdx += 1
+			}
+			return GraphPath(
+				start = startIndex,
+				end = endIndex,
+				vertices = vertices,
+				between = between,
+				distance = distanceMatrix,
+				originalIndex = originalIndex,
+			)
+		}
+
 		fun tour(name: String): GraphPath? {
 			val data = load(name) ?: return null
 			val distanceMatrix = mutableListOf<List<Double>>()

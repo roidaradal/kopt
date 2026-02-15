@@ -14,6 +14,7 @@ const val EdgeColoring = "edge_coloring"
 const val EdgeCover = "edge_cover"
 const val GraphMatching = "graph_matching"
 const val GraphPartition = "graph_partition"
+const val GraphPathing = "graph_path"
 const val GraphTour = "graph_tour"
 const val IndependentSet = "independent_set"
 const val InducedPath = "induced_path"
@@ -51,6 +52,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	EdgeCover to ::newEdgeCover,
 	GraphMatching to ::newGraphMatching,
 	GraphPartition to ::newGraphPartition,
+	GraphPathing to ::newGraphPath,
 	GraphTour to ::newGraphTour,
 	IndependentSet to ::newIndependentSet,
 	InducedPath to ::newInducedPath,
