@@ -1,5 +1,9 @@
 ## TODO 
 * Graph Path  
+## v0.1.37 - Allocation 
+* **Commit**: 2026-02-15 11:34
+* problem.newAllocation
+* data.Resource
 ## v0.1.36 - Warehouse Location 
 * **Commit**: 2026-02-14 08:45
 * problem.newWarehouseLocation 

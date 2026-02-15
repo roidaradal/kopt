@@ -2,6 +2,7 @@ package problem
 
 import discrete.Problem
 
+const val Allocation = "allocation"
 const val BinCover = "bin_cover"
 const val BinPacking = "bin_packing"
 const val CarPainting = "car_painting"
@@ -38,6 +39,7 @@ const val VertexCover = "vertex_cover"
 const val WarehouseLocation = "warehouse_location"
 
 val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
+	Allocation to ::newAllocation,
 	BinCover to ::newBinCover,
 	BinPacking to ::newBinPacking,
 	CarPainting to ::newCarPainting,
