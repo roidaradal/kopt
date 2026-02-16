@@ -1,3 +1,10 @@
+## v0.1.40 - Nurse Scheduling 
+* **Commit**: 
+* problem.newNurseScheduling
+* data.NurseSchedule 
+## v0.1.39 - Scene Allocation
+* **Commit**: 2026-02-16 20:00
+* Add `scene` to Allocation
 ## v0.1.38 - Graph Path 
 * **Commit**: 2026-02-15 12:56
 * problem.newGraphPath
