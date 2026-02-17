@@ -7,6 +7,7 @@ class Variables {
 	companion object {
 		fun <T> from(items: List<T>): List<Variable> = (0 until items.size).toList()
 		fun range(first: Int, last: Int): List<Variable> = (first..last).toList()
+		fun index(numItems: Int): List<Variable> = (0 until numItems).toList()
 	}
 }
 

@@ -25,6 +25,7 @@ const val Knapsack = "knapsack"
 const val MaxCoverage = "max_coverage"
 const val NumberColoring = "number_coloring"
 const val NumberPartition = "number_partition"
+const val NurseScheduling = "nurse_scheduling"
 const val Satisfaction = "satisfaction"
 const val SetCover = "set_cover"
 const val SetPacking = "set_packing"
@@ -63,6 +64,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	MaxCoverage to ::newMaxCoverage,
 	NumberColoring to ::newNumberColoring,
 	NumberPartition to ::newNumberPartition,
+	NurseScheduling to ::newNurseScheduling,
 	Satisfaction to ::newSatisfaction,
 	SetCover to ::newSetCover,
 	SetPacking to ::newSetPacking,

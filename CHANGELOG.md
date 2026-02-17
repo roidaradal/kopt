@@ -1,7 +1,8 @@
 ## v0.1.40 - Nurse Scheduling 
-* **Commit**: 
+* **Commit**: 2026-02-17 21:34
 * problem.newNurseScheduling
 * data.NurseSchedule 
+* fn.MaxConsecutive
 ## v0.1.39 - Scene Allocation
 * **Commit**: 2026-02-16 20:00
 * Add `scene` to Allocation

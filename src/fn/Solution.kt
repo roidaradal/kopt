@@ -80,6 +80,14 @@ fun Solution.tallyValues(values: List<Value>): Map<Value, Int> {
 	return count
 }
 
+fun Solution.groupByValue(): Map<Value, List<Variable>> {
+	val groups = mutableMapOf<Value, List<Variable>>()
+	for((k, v) in this.map) {
+		groups[v] = (groups[v] ?: listOf()) + listOf(k)
+	}
+	return groups
+}
+
 fun Solution.spannedVertices(graph: Graph): Set<Vertex>? {
 	val edges = asSubset().mapList(graph.edges)
 	if (edges.isEmpty()) return null
