@@ -12,6 +12,7 @@ const val CliqueCover = "clique_cover"
 const val DominatingSet = "dominating_set"
 const val EdgeColoring = "edge_coloring"
 const val EdgeCover = "edge_cover"
+const val FlowShopScheduling = "flow_shop"
 const val GraphMatching = "graph_matching"
 const val GraphPartition = "graph_partition"
 const val GraphPathing = "graph_path"
@@ -51,6 +52,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	DominatingSet to ::newDominatingSet,
 	EdgeColoring to ::newEdgeColoring,
 	EdgeCover to ::newEdgeCover,
+	FlowShopScheduling to ::newFlowShopScheduling,
 	GraphMatching to ::newGraphMatching,
 	GraphPartition to ::newGraphPartition,
 	GraphPathing to ::newGraphPath,
