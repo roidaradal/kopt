@@ -1,5 +1,6 @@
 package fn
 
+import data.AssignmentCfg
 import data.Graph
 import data.GraphPath
 import data.Vertex
@@ -35,6 +36,16 @@ class StringFn {
 		fun <T> values(p: Problem, items: List<T>?): SolutionStringFn {
 			return fun(solution: Solution): String {
 				return solution.valueStrings(p, items).joinToString(" ")
+			}
+		}
+
+		fun assignment(p: Problem, cfg: AssignmentCfg): (Solution) -> String {
+			return fun(solution: Solution): String {
+				return p.variables.map { worker ->
+					val task = solution.map[worker] ?: return ""
+					if (cfg.cost[worker][task] == 0.0) return ""
+					"w${cfg.workers[worker]} = t${cfg.tasks[task]}"
+				}.filter{ it != "" }.wrapBraces()
 			}
 		}
 

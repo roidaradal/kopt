@@ -1,3 +1,8 @@
+## v0.1.42 - Assignment 
+* **Commit**: 2026-02-19 22:11
+* problem.newAssignment
+* data.AssignmentCfg 
+* StringFn.Assignment
 ## v0.1.41 - Flow Shop Scheduling 
 * **Commit**: 2026-02-18 23:03
 * problem.newFlowShopScheduling 
