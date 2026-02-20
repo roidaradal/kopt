@@ -8,7 +8,7 @@ const val HardPenalty: Penalty = Inf
 typealias ConstraintFn = (Solution) -> Boolean
 
 class Constraint(
-	val test: ConstraintFn,
+	private val test: ConstraintFn,
 	val penalty: Penalty,
 	val variables: List<Variable>
 ){

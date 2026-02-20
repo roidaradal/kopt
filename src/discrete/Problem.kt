@@ -12,7 +12,7 @@ class Problem(
     var description: String? = null,
 ) {
     val domain: MutableMap<Variable, List<Value>> = mutableMapOf()
-    val constraints: MutableList<Constraint> = mutableListOf()
+    private val constraints: MutableList<Constraint> = mutableListOf()
     private var _uniformDomain: List<Value>? = null
 
     val uniformDomain: List<Value> get() = _uniformDomain ?: emptyList()
@@ -35,7 +35,7 @@ class Problem(
         addGlobalConstraint(test, penalty, variables)
     }
 
-    fun addGlobalConstraint(test: ConstraintFn, penalty: Penalty, variables: List<Variable>) {
+    private fun addGlobalConstraint(test: ConstraintFn, penalty: Penalty, variables: List<Variable>) {
         constraints.add(Constraint(test, penalty, variables))
     }
 

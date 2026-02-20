@@ -68,7 +68,7 @@ data class Graph(
 			}
 			return g
 		}
-		fun directed(vertexString: String?, edgePairString: String?): Graph {
+		private fun directed(vertexString: String?, edgePairString: String?): Graph {
 			val vertices = vertexString?.spaceSplit() ?: emptyList()
 			val edgePairs = edgePairString?.spaceSplit() ?: emptyList()
 			val g = Graph(vertices)

@@ -44,3 +44,32 @@ data class AssignmentCfg(
 		}
 	}
 }
+
+data class QuadraticAssignment(
+	val count: Int = 0,
+	val distance: List<List<Double>> = emptyList(),
+	val flow: List<List<Double>> = emptyList(),
+) {
+	override fun toString(): String {
+		return "Count: $count\nDistance: $distance \nFlow: $flow"
+	}
+
+	companion object {
+		fun new(name: String): QuadraticAssignment? {
+			val data = load(name) ?: return null
+			val distance = mutableListOf<List<Double>>()
+			for(line in data["distance"].parseList()) {
+				distance.add(line.matrixRow(false))
+			}
+			val flow = mutableListOf<List<Double>>()
+			for(line in data["flow"].parseList()) {
+				flow.add(line.matrixRow(false))
+			}
+			return QuadraticAssignment(
+				count = data["count"].parseInt(),
+				distance = distance,
+				flow = flow,
+			)
+		}
+	}
+}

@@ -1,3 +1,7 @@
+## v0.1.43 - Quadratic Assignment 
+* **Commit**: 2026-02-20 21:06
+* Add `quadratic`, `quadratic_bottleneck` to Assignment 
+* data.QuadraticAssignment
 ## v0.1.42 - Assignment 
 * **Commit**: 2026-02-19 22:11
 * problem.newAssignment

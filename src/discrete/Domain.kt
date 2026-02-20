@@ -5,7 +5,7 @@ typealias Value = Int
 
 class Variables {
 	companion object {
-		fun <T> from(items: List<T>): List<Variable> = (0 until items.size).toList()
+		fun <T> from(items: List<T>): List<Variable> = items.indices.toList()
 		fun range(first: Int, last: Int): List<Variable> = (first..last).toList()
 		fun index(numItems: Int): List<Variable> = (0 until numItems).toList()
 	}
@@ -13,7 +13,7 @@ class Variables {
 
 class Domain {
 	companion object {
-		fun <T> from(items: List<T>): List<Value> = (0 until items.size).toList()
+		fun <T> from(items: List<T>): List<Value> = items.indices.toList()
 		fun boolean(): List<Value> = listOf(1, 0)
 		fun range(first: Int, last: Int): List<Value> = (first..last).toList()
 		fun index(numItems: Int): List<Value> = (0 until numItems).toList()
