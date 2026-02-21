@@ -2,6 +2,7 @@ package problem
 
 import data.AssignmentCfg
 import data.QuadraticAssignment
+import data.Weapons
 import data.combinations
 import data.newName
 import discrete.Domain
@@ -13,20 +14,23 @@ import discrete.Solution
 import discrete.Variables
 import fn.Constraint
 import fn.StringFn
+import fn.wrapBraces
 
 fun newAssignment(variant: String, n: Int): Problem? {
 	val name = newName(Assignment, variant, n)
 	return when (variant) {
 		"basic" -> assignment(name)
 		"bottleneck" -> bottleneckAssignment(name)
+		"general" -> generalizedAssignment(name)
 		"quadratic" -> quadraticAssignment(name)
 		"quadratic_bottleneck" -> quadraticBottleneckAssignment(name)
+		"weapon" -> weaponTargetAssignment(name)
 		else -> null
 	}
 }
 
 fun newAssignmentProblem(name: String): Pair<Problem?, AssignmentCfg?> {
-	val cfg = AssignmentCfg.new(name) ?: return Pair(null, null)
+	val cfg = AssignmentCfg.new(name, true) ?: return Pair(null, null)
 	val p = Problem(
 		name,
 		description = cfg.toString(),
@@ -80,6 +84,39 @@ fun bottleneckAssignment(name: String): Problem? {
 	return p
 }
 
+fun generalizedAssignment(name: String): Problem? {
+	val cfg = AssignmentCfg.new(name, false) ?: return null
+	val p = Problem(
+		name,
+		description = cfg.toString(),
+		type = ProblemType.ASSIGNMENT,
+		goal = Goal.MAXIMIZE,
+		variables = Variables.from(cfg.tasks),
+	)
+	p.addVariableDomains(Domain.from(cfg.workers))
+
+	p.addUniversalConstraint(fun(solution: Solution): Boolean {
+		val total = mutableMapOf<Int, Double>()
+		for ((task, worker) in solution.map) {
+			total[worker] = (total[worker] ?: 0.0) + cfg.cost[worker][task]
+		}
+		return cfg.capacity.withIndex().all { (worker, limit) -> (total[worker] ?: 0.0) <= limit }
+	})
+
+	p.objectiveFn = fun(solution: Solution): Score {
+		return solution.map.entries.sumOf { (task, worker) -> cfg.value[worker][task] }
+	}
+
+	p.solutionStringFn = fun(solution: Solution): String {
+		return p.variables.map { task ->
+			val worker = solution.map[task] ?: return ""
+			"t${cfg.tasks[task]} = w${cfg.workers[worker]}"
+		}.filter { it != "" }.wrapBraces()
+	}
+
+	return p
+}
+
 fun newQuadraticAssignmentProblem(name: String): Pair<Problem?, QuadraticAssignment?> {
 	val cfg = QuadraticAssignment.new(name) ?: return Pair(null, null)
 	val p = Problem(
@@ -129,5 +166,54 @@ fun quadraticBottleneckAssignment(name: String): Problem? {
 		}
 		return maxCost
 	}
+	return p
+}
+
+fun weaponTargetAssignment(name: String): Problem? {
+	val cfg = Weapons.new(name) ?: return null
+
+	val weapons = mutableListOf<Int>()
+	for(i in 0 until cfg.weapons.size) {
+		repeat(cfg.count[i]) { weapons.add(i) }
+	}
+
+	val p = Problem(
+		name,
+		description = cfg.toString(),
+		type = ProblemType.ASSIGNMENT,
+		goal = Goal.MINIMIZE,
+		variables = Variables.from(cfg.weapons),
+	)
+	p.addVariableDomains(Domain.from(cfg.targets))
+
+	p.objectiveFn = fun(solution: Solution): Score {
+		val survival = cfg.value.toMutableList()
+		for((w, target) in solution.map) {
+			val weapon = weapons[w]
+			survival[target] *= 1.0 - cfg.chance[weapon][target]
+		}
+		return survival.sum()
+	}
+
+	val weaponTargets = fun(solution: Solution): String {
+		val matrix = mutableListOf<MutableList<Int>>()
+		for(i in cfg.weapons.indices) {
+			matrix.add(MutableList(cfg.targets.size) { 0 })
+		}
+		for((w, target) in solution.map) {
+			matrix[weapons[w]][target] += 1
+		}
+		val output = mutableListOf<String>()
+		for((i, weapon) in cfg.weapons.withIndex()) {
+			for((j, target) in cfg.targets.withIndex()) {
+				if(matrix[i][j] == 0) continue
+				output.add("${matrix[i][j]}*$weapon = $target")
+			}
+		}
+		return output.wrapBraces()
+	}
+
+	p.solutionStringFn = weaponTargets
+	p.solutionCoreFn = weaponTargets
 	return p
 }
