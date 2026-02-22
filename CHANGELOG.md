@@ -1,3 +1,8 @@
+## v0.1.45 - Additional Allocation 
+* **Commit**: 2026-02-22 22:35
+* Add `fair_item`, `house` to Allocation 
+* data.ItemAllocation 
+* StringFn.Map
 ## v0.1.44 - Generalized Assignment 
 * **Commit**: 2026-02-21 17:11
 * Add `general`, `weapon` to Assignment 

@@ -39,6 +39,25 @@ class StringFn {
 			}
 		}
 
+		fun <T, V> map(p: Problem, variables: List<T>?, values: List<V>?): SolutionStringFn {
+			return fun(solution: Solution): String {
+				return p.variables.map { x ->
+					val value = solution.map[x] ?: return ""
+					val k = if (variables == null) {
+						x.toString()
+					} else {
+						variables[x].toString()
+					}
+					val v = if (values == null) {
+						value.toString()
+					} else {
+						values[value].toString()
+					}
+					"$k = $v"
+				}.filter { it != "" }.wrapBraces()
+			}
+		}
+
 		fun assignment(p: Problem, cfg: AssignmentCfg): (Solution) -> String {
 			return fun(solution: Solution): String {
 				return p.variables.map { worker ->

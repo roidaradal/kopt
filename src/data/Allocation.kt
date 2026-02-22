@@ -1,5 +1,32 @@
 package data
 
+data class ItemAllocation(
+	val persons: List<String> = emptyList(),
+	val items: List<String> = emptyList(),
+	val value: Map<String, List<Double>> = emptyMap(),
+) {
+	override fun toString(): String {
+		return "Persons: $persons\nItems: $items"
+	}
+
+	companion object {
+		fun new(name: String): ItemAllocation? {
+			val data = load(name) ?: return null
+			val value = mutableMapOf<String, List<Double>>()
+			for((person, line) in data["value"].parseMap()) {
+				value[person] = line.toDoubleList()
+			}
+			return ItemAllocation(
+				persons = data["persons"].toStringList(),
+				items = data["items"].toStringList(),
+				value = value,
+			)
+		}
+	}
+
+}
+
+
 data class Resource(
 	val budget: Double = 0.0,
 	val items: List<String> = emptyList(),
