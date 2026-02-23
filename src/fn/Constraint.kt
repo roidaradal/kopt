@@ -2,6 +2,7 @@ package fn
 
 import data.Graph
 import data.GraphPath
+import data.Numbers
 import data.Vertex
 import discrete.ConstraintFn
 import discrete.Inf
@@ -56,6 +57,17 @@ class Constraint {
 					if (cfg.distance[prev][curr] == Inf) return false
 					visited.add(curr)
 					prev = curr
+				}
+				return true
+			}
+		}
+		fun increasingSubsequence(cfg: Numbers): ConstraintFn {
+			return fun(solution: Solution): Boolean {
+				val subset = solution.asSubset()
+				if (subset.size <= 1) return true
+				val subsequence = subset.sorted().mapList(cfg.numbers)
+				for ( i in 0 until subset.size-1) {
+					if (subsequence[i] >= subsequence[i+1]) return false
 				}
 				return true
 			}

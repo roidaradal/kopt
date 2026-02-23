@@ -4,7 +4,9 @@ import data.Numbers
 import data.newName
 import discrete.Goal
 import discrete.Problem
+import discrete.Score
 import discrete.Solution
+import fn.Constraint
 import fn.ScoreFn
 import fn.asSubset
 import fn.mapList
@@ -14,6 +16,9 @@ fun newSubsequence(variant: String, n: Int): Problem? {
 	return when (variant) {
 		"increasing" -> longestIncreasingSubsequence(name)
 		"alternating" -> longestAlternatingSubsequence(name)
+		"decreasing" -> longestDecreasingSubsequence(name)
+		"max_sum_increasing" -> maxSumIncreasingSubsequence(name)
+		"max_weight_increasing" -> maxWeightIncreasingSubsequence(name)
 		else -> null
 	}
 }
@@ -31,15 +36,7 @@ fun longestIncreasingSubsequence(name: String): Problem? {
 	val (p, cfg) = newLongestSubsequenceProblem(name)
 	if (p == null || cfg == null) return null
 
-	p.addUniversalConstraint(fun(solution: Solution): Boolean {
-		val subset = solution.asSubset()
-		if (subset.size <= 1) return true
-		val subsequence = subset.sorted().mapList(cfg.numbers)
-		for ( i in 0 until subset.size-1) {
-			if (subsequence[i] >= subsequence[i+1]) return false
-		}
-		return true
-	})
+	p.addUniversalConstraint(Constraint.increasingSubsequence(cfg))
 	return p
 }
 
@@ -62,5 +59,43 @@ fun longestAlternatingSubsequence(name: String): Problem? {
 		}
 		return true
 	})
+	return p
+}
+
+fun longestDecreasingSubsequence(name: String): Problem? {
+	val (p, cfg) = newLongestSubsequenceProblem(name)
+	if (p == null || cfg == null) return null
+
+	p.addUniversalConstraint(fun(solution: Solution): Boolean {
+		val subset = solution.asSubset()
+		if (subset.size <= 1) return true
+		val subsequence = subset.sorted().mapList(cfg.numbers)
+		for ( i in 0 until subset.size-1) {
+			if (subsequence[i] <= subsequence[i+1]) return false
+		}
+		return true
+	})
+	return p
+}
+
+fun maxSumIncreasingSubsequence(name: String): Problem? {
+	val (p, cfg) = newLongestSubsequenceProblem(name)
+	if (p == null || cfg == null) return null
+
+	p.addUniversalConstraint(Constraint.increasingSubsequence(cfg))
+	p.objectiveFn = fun(solution: Solution): Score {
+		return solution.asSubset().sumOf { cfg.numbers[it] }.toDouble()
+	}
+	return p
+}
+
+fun maxWeightIncreasingSubsequence(name: String): Problem? {
+	val (p, cfg) = newLongestSubsequenceProblem(name)
+	if (p == null || cfg == null) return null
+	if (cfg.weight.size != cfg.numbers.size) return null
+	p.addUniversalConstraint(Constraint.increasingSubsequence(cfg))
+	p.objectiveFn = fun(solution: Solution): Score {
+		return solution.asSubset().sumOf { cfg.weight[it] }
+	}
 	return p
 }

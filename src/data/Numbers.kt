@@ -2,6 +2,7 @@ package data
 
 data class Numbers(
 	val numbers: List<Int> = emptyList(),
+	val weight: List<Double> = emptyList(),
 	val target: Int = 0,
 ) {
 	companion object {
@@ -9,6 +10,7 @@ data class Numbers(
 			val data = load(name) ?: return null
 			return Numbers(
 				numbers = data["numbers"].toIntList(),
+				weight = data["weight"].toDoubleList(),
 				target = data["target"].parseInt(),
 			)
 		}
