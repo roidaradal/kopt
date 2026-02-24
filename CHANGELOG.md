@@ -1,3 +1,6 @@
+## v0.1.47 - Additional Warehouse Location 
+* **Commit**: 2026-02-24 12:36
+* Add `minimax`, `maxmin` to Warehouse Location 
 ## v0.1.46 - Additional Subsequence 
 * **Commit**: 2026-02-23 21:55
 * Add `decreasing`, `max_sum_increasing`, `max_weight_increasing` to Subsequence 

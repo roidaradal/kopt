@@ -6,6 +6,8 @@ data class Warehouse(
 	val capacity: List<Int> = emptyList(),
 	val warehouseCost: List<Double> = emptyList(),
 	val storeCost: List<List<Double>> = emptyList(),
+	val count: Int = 0,
+	val distance: List<List<Double>> = emptyList(),
 ) {
 	override fun toString(): String {
 		return "Stores: $stores\nWarehouse: $warehouses\nCapacity: $capacity\nCost: $warehouseCost\nStoreCost: $storeCost"
@@ -18,12 +20,18 @@ data class Warehouse(
 			for(line in data["storeCost"].parseList()) {
 				storeCost.add(line.matrixRow(true))
 			}
+			val distance = mutableListOf<List<Double>>()
+			for(line in data["distance"].parseList()) {
+				distance.add(line.matrixRow(true))
+			}
 			return Warehouse(
 				stores = data["stores"].toStringList(),
 				warehouses = data["warehouses"].toStringList(),
 				capacity = data["capacity"].toIntList(),
 				warehouseCost = data["warehouseCost"].toDoubleList(),
 				storeCost =  storeCost,
+				count = data["count"].parseInt(),
+				distance = distance,
 			)
 		}
 	}
