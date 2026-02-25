@@ -5,6 +5,7 @@ data class GraphCfg(
 	val k: Int = 0,
 	val edgeWeight: List<Double> = emptyList(),
 	val edgeColor: List<String> = emptyList(),
+	val vertexWeight: List<Double> = emptyList(),
 	val vertexColor: List<String> = emptyList(),
 	val terminals: List<String> = emptyList(),
 ){
@@ -20,6 +21,7 @@ data class GraphCfg(
 				k = data["k"].parseInt(),
 				edgeWeight = data["edgeWeight"].toDoubleList(),
 				edgeColor = data["edgeColor"].toStringList(),
+				vertexWeight = data["vertexWeight"].toDoubleList(),
 				vertexColor = data["vertexColor"].toStringList(),
 				terminals = data["terminals"].toStringList(),
 			)

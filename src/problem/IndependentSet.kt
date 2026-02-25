@@ -7,6 +7,7 @@ import discrete.Goal
 import discrete.Problem
 import discrete.Solution
 import fn.Constraint
+import fn.ScoreFn
 import fn.asSubset
 import fn.mapList
 
@@ -15,6 +16,7 @@ fun newIndependentSet(variant: String, n: Int): Problem? {
 	return when (variant) {
 		"basic" -> independentSet(name)
 		"rainbow" -> rainbowIndependentSet(name)
+		"weighted" -> weightedIndependentSet(name)
 		else -> null
 	}
 }
@@ -45,8 +47,15 @@ fun independentSet(name: String): Problem? {
 fun rainbowIndependentSet(name: String): Problem? {
 	val (p, cfg) = newIndependentSetProblem(name)
 	if (p == null || cfg == null) return null
-	val graph = cfg.graph
-	if (graph.vertices.size != cfg.vertexColor.size) return null
+	if (cfg.graph.vertices.size != cfg.vertexColor.size) return null
 	p.addUniversalConstraint(Constraint.isRainbowColored(cfg.vertexColor))
+	return p
+}
+
+fun weightedIndependentSet(name: String): Problem? {
+	val (p, cfg) = newIndependentSetProblem(name)
+	if (p == null || cfg == null) return null
+	if (cfg.graph.vertices.size != cfg.vertexWeight.size) return null
+	p.objectiveFn = ScoreFn.sumWeightedValues(p.variables, cfg.vertexWeight)
 	return p
 }

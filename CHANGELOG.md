@@ -1,3 +1,6 @@
+## v0.1.48 - Additional Independent Set
+* **Commit**: 2026-02-25 20:41
+* Add `weighted` to Independent Set
 ## v0.1.47 - Additional Warehouse Location 
 * **Commit**: 2026-02-24 12:36
 * Add `minimax`, `maxmin` to Warehouse Location 
