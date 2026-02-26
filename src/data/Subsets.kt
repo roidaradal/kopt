@@ -5,6 +5,7 @@ data class Subsets(
 	val names: List<String> = emptyList(),
 	val subsets: List<List<String>> = emptyList(),
 	val limit: Int = 0,
+	val weight: Map<String, Double> = emptyMap(),
 ) {
 	companion object {
 		fun new(name: String): Subsets? {
@@ -15,11 +16,16 @@ data class Subsets(
 				names.add(key)
 				subsets.add(value.toStringList())
 			}
+			val weight = mutableMapOf<String, Double>()
+			for((key, value) in data["weight"].parseMap()) {
+				weight[key] = value.toDouble()
+			}
 			return Subsets(
 				universal = data["universal"].toStringList(),
 				names = names,
 				subsets = subsets,
 				limit = data["limit"].parseInt(),
+				weight = weight,
 			)
 		}
 	}
