@@ -1,3 +1,6 @@
+## v0.1.50 - Additional Set Packing 
+* **Commit**: 2026-02-27 21:22
+* Add `weighted` to Set Packing
 ## v0.1.49 - Additional Set Splitting
 * **Commit**: 2026-02-26 20:38
 * Add `weighted` to Set Splitting
