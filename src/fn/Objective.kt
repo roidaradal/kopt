@@ -19,6 +19,13 @@ class ScoreFn {
 			}
 		}
 
+		fun sumWeightedSubset(keys: List<String>, weight: Map<String, Double>): ObjectiveFn {
+			return fun(solution: Solution): Score {
+				val subsets = solution.asSubset().map { keys[it] }
+				return subsets.sumOf { subset -> weight[subset] ?: 0.0 }
+			}
+		}
+
 		fun pathCost(cfg: GraphPath): ObjectiveFn {
 			return fun(solution: Solution): Score {
 				return solution.pathDistances(cfg).sum()

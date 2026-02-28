@@ -4,8 +4,8 @@ import data.Subsets
 import data.newName
 import discrete.Goal
 import discrete.Problem
-import discrete.Score
 import discrete.Solution
+import fn.ScoreFn
 import fn.asSubset
 import fn.updateCounter
 
@@ -41,9 +41,6 @@ fun weightedSetPacking(name: String): Problem? {
 	if(p == null || cfg == null) return null
 	if(cfg.weight.size != cfg.names.size) return null
 
-	p.objectiveFn = fun(solution: Solution): Score {
-		val subsets = solution.asSubset().map { cfg.names[it] }
-		return subsets.sumOf { subset -> cfg.weight[subset] ?: 0.0 }
-	}
+	p.objectiveFn = ScoreFn.sumWeightedSubset(cfg.names, cfg.weight)
 	return p
 }

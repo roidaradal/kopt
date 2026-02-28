@@ -1,3 +1,7 @@
+## v0.1.51 - Additional Set Cover 
+* **Commit** : 2026-02-28 19:08
+* Add `weighted` to Set Cover 
+* ScoreFn.sumWeightedSubset
 ## v0.1.50 - Additional Set Packing 
 * **Commit**: 2026-02-27 21:22
 * Add `weighted` to Set Packing
