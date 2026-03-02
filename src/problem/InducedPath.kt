@@ -17,6 +17,8 @@ fun newInducedPath(variant: String, n: Int): Problem? {
 	val name = newName(InducedPath, variant, n)
 	return when (variant) {
 		"basic" -> maxInducedPath(name)
+		"weighted" -> maxWeightedInducedPath(name)
+		"k" -> kInducedPath(name)
 		else -> null
 	}
 }
@@ -62,5 +64,28 @@ fun maxInducedPath(name: String): Problem? {
 	p.objectiveFn = fun(solution: Solution): Score {
 		return solution.values.filter { it >= 0 }.size.toDouble()
 	}
+	return p
+}
+
+fun maxWeightedInducedPath(name: String): Problem? {
+	val (p, cfg) = newInducedPathProblem(name)
+	if (p == null || cfg == null) return null
+	if (cfg.vertexWeight.size != cfg.graph.vertices.size) return null
+
+	p.objectiveFn = fun(solution: Solution): Score {
+		return solution.entries.filter { e -> e.value >= 0 }.sumOf { e ->  cfg.vertexWeight[e.key] }
+	}
+	return p
+}
+
+fun kInducedPath(name: String): Problem? {
+	val (p, cfg) = newInducedPathProblem(name)
+	if (p == null || cfg == null) return null
+	if (cfg.k == 0) return null
+
+	p.goal = Goal.SATISFY
+	p.addUniversalConstraint(fun(solution: Solution): Boolean {
+		return solution.values.filter { it >= 0 }.size == cfg.k
+	})
 	return p
 }

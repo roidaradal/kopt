@@ -1,3 +1,7 @@
+## v0.1.53 - Additional Induced Path 
+* **Commit**: 2026-03-02 21:38
+* Add `weighted`, `k` to Induced Path
+* Solution.entries
 ## v0.1.52 - Additional Edge Cover 
 * **Commit**: 2026-03-01 19:03
 * Add `weighted` to Edge Cover

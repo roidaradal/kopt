@@ -15,6 +15,9 @@ class Solution {
 	val values: List<Value>
 		get() = map.values.toList()
 
+	val entries: List<Map.Entry<Variable, Value>>
+		get() = map.entries.toList()
+
 	fun tuple(p: Problem): List<Value> = p.variables.map { this.map[it] ?: 0 }
 
 }
