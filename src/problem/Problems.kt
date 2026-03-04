@@ -21,6 +21,7 @@ const val GraphTour = "graph_tour"
 const val IndependentSet = "independent_set"
 const val InducedPath = "induced_path"
 const val Interval = "interval"
+const val JobShopScheduling = "job_shop"
 const val KCenter = "k_center"
 const val KCut = "k_cut"
 const val Knapsack = "knapsack"
@@ -61,6 +62,7 @@ val Creator: Map<String, (String, Int) -> Problem?>  = mapOf(
 	GraphTour to ::newGraphTour,
 	IndependentSet to ::newIndependentSet,
 	InducedPath to ::newInducedPath,
+	JobShopScheduling to ::newJobShopScheduling,
 	Interval to ::newInterval,
 	KCenter to ::newKCenter,
 	KCut to ::newKCut,

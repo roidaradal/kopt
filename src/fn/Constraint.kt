@@ -2,7 +2,10 @@ package fn
 
 import data.Graph
 import data.GraphPath
+import data.JobShop
 import data.Numbers
+import data.Task
+import data.TimeRange
 import data.Vertex
 import discrete.ConstraintFn
 import discrete.Inf
@@ -72,5 +75,32 @@ class Constraint {
 				return true
 			}
 		}
+		fun noMachineOverlap(cfg: JobShop, tasks: List<Task>): ConstraintFn {
+			return noOverlap(tasks, cfg.machines, fun(task: Task): String {
+				return task.machine
+			})
+		}
+	}
+}
+
+fun noOverlap(tasks: List<Task>, keys: List<String>, keyFn: (Task) -> String): ConstraintFn {
+	return fun(solution: Solution): Boolean {
+		val groupSched = keys.associateWith { listOf<TimeRange>() }.toMutableMap()
+		for((x, start) in solution.map) {
+			val task = tasks[x]
+			val sched = TimeRange(start, start + task.duration)
+			val key = keyFn(task)
+			groupSched[key] = (groupSched.getOrDefault(key, listOf()) + sched)
+		}
+		for ((_, scheds) in groupSched) {
+			val sortedScheds = scheds.sortedBy { it.first }
+			for(i in 0 until sortedScheds.size-1) {
+				val curr = sortedScheds[i]
+				val (start1, end1) = curr
+				val start2 = sortedScheds[i+1].first
+				if (start2 <= start1 || start2 < end1) return false
+			}
+		}
+		return true
 	}
 }

@@ -1,3 +1,10 @@
+## v0.1.55 - Job Shop Scheduling 
+* **Commit**: 2026-03-04 21:50
+* problem.newJobShopScheduling 
+* data.Task, SlotSched
+* ConstraintFn.noMachineOverlap
+* ScoreFn.scheduleMakespan 
+* StringFn.shopSchedule
 ## v0.1.54 - Additional Subset Sum
 * **Commit**: 2026-03-03 20:57
 * Add `max_sum`, `max_min` to Subset Sum

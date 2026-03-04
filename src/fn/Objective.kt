@@ -1,10 +1,12 @@
 package fn
 
 import data.GraphPath
+import data.Task
 import discrete.ObjectiveFn
 import discrete.Score
 import discrete.Solution
 import discrete.Variable
+import kotlin.math.max
 
 class ScoreFn {
 	companion object {
@@ -29,6 +31,17 @@ class ScoreFn {
 		fun pathCost(cfg: GraphPath): ObjectiveFn {
 			return fun(solution: Solution): Score {
 				return solution.pathDistances(cfg).sum()
+			}
+		}
+
+		fun scheduleMakespan(tasks: List<Task>): ObjectiveFn {
+			return fun(solution: Solution): Score {
+				var makespan = 0
+				for ((x, start) in solution.map) {
+					val end = start + tasks[x].duration
+					makespan = max(makespan, end)
+				}
+				return makespan.toDouble()
 			}
 		}
 	}

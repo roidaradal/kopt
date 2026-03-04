@@ -3,6 +3,8 @@ package fn
 import data.AssignmentCfg
 import data.Graph
 import data.GraphPath
+import data.SlotSched
+import data.Task
 import data.Vertex
 import discrete.Problem
 import discrete.Solution
@@ -110,6 +112,31 @@ class StringFn {
 				}
 				path.add(tail)
 				return path.joinToString(" ")
+			}
+		}
+
+		fun shopSchedule(tasks: List<Task>, machines: List<String>): SolutionStringFn {
+			return fun(solution: Solution): String {
+				val out = mutableListOf<String>()
+				val machineSched = mutableMapOf<String, List<SlotSched>>()
+				for((variable, task) in tasks.withIndex()) {
+					val start = solution.map[variable] ?: continue
+					val end = start + task.duration
+					out.add("${task.name} - ${task.machine} - [$start, $end]")
+					val slot = SlotSched(start, end, task.name)
+					machineSched[task.machine] = (machineSched.getOrDefault(task.machine, emptyList()) + slot)
+				}
+				for(machine in machines) {
+					val slots = machineSched[machine] ?: emptyList()
+					if (slots.isEmpty()) {
+						out.add("$machine - NONE")
+					} else {
+						for(slot in slots.sortedBy { it.start }) {
+							out.add("$machine - [${slot.start}, ${slot.end}] - ${slot.name}")
+						}
+					}
+				}
+				return out.joinToString("|")
 			}
 		}
 	}
