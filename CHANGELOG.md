@@ -1,3 +1,6 @@
+## v0.1.56 - Open Shop Scheduling 
+* **Commit**: 2026-03-05 21:41
+* problem.newOpenShopScheduling
 ## v0.1.55 - Job Shop Scheduling 
 * **Commit**: 2026-03-04 21:50
 * problem.newJobShopScheduling 

@@ -1,6 +1,6 @@
 package problem
 
-import data.FlowShop
+import data.ShopSchedule
 import data.newName
 import discrete.Domain
 import discrete.Goal
@@ -24,7 +24,7 @@ fun newFlowShopScheduling(variant: String, n: Int): Problem? {
 }
 
 fun flowShopScheduling(name: String): Problem? {
-	val cfg = FlowShop.new(name) ?: return null
+	val cfg = ShopSchedule.new(name) ?: return null
 	val p = Problem(
 		name,
 		description = cfg.toString(),

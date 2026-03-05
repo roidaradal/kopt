@@ -1,6 +1,6 @@
 package problem
 
-import data.JobShop
+import data.ShopSchedule
 import data.Task
 import data.newName
 import discrete.Domain
@@ -23,7 +23,7 @@ fun newJobShopScheduling(variant: String, n: Int): Problem? {
 }
 
 fun jobShopScheduling(name: String): Problem? {
-	val cfg = JobShop.new(name) ?: return null
+	val cfg = ShopSchedule.new(name) ?: return null
 
 	var variable = 0
 	val jobTasks = mutableMapOf<Int, List<Variable>>()
@@ -53,6 +53,8 @@ fun jobShopScheduling(name: String): Problem? {
 		type = ProblemType.ASSIGNMENT,
 		goal = Goal.MINIMIZE,
 		variables = variables,
+		objectiveFn = ScoreFn.scheduleMakespan(allTasks),
+		solutionStringFn =  StringFn.shopSchedule(allTasks, cfg.machines),
 	)
 	p.domain.putAll(domain)
 
@@ -70,8 +72,6 @@ fun jobShopScheduling(name: String): Problem? {
 	})
 
 	p.addUniversalConstraint(Constraint.noMachineOverlap(cfg, allTasks))
-	p.objectiveFn = ScoreFn.scheduleMakespan(allTasks)
-	p.solutionStringFn = StringFn.shopSchedule(allTasks, cfg.machines)
 
 	return p
 }
