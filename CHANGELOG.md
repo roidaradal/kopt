@@ -1,3 +1,6 @@
+## v0.1.57 - Additional Vertex Cover 
+* **Commit**: 2026-03-06 22:08
+* Add `weighted` to Vertex Cover
 ## v0.1.56 - Open Shop Scheduling 
 * **Commit**: 2026-03-05 21:41
 * problem.newOpenShopScheduling
