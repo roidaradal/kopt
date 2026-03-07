@@ -1,3 +1,6 @@
+## v0.1.58 - Additional Steiner Tree
+* **Commit**: 2026-03-07 12:48
+* Add `group`, `degree` to Steiner Tree
 ## v0.1.57 - Additional Vertex Cover 
 * **Commit**: 2026-03-06 22:08
 * Add `weighted` to Vertex Cover

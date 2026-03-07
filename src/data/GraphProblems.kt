@@ -8,6 +8,7 @@ data class GraphCfg(
 	val vertexWeight: List<Double> = emptyList(),
 	val vertexColor: List<String> = emptyList(),
 	val terminals: List<String> = emptyList(),
+	val groups: List<List<String>> = emptyList(),
 ){
 	override fun toString(): String = graph.toString()
 
@@ -16,6 +17,10 @@ data class GraphCfg(
 		fun directed(name: String): GraphCfg? = new(name, true)
 		private fun new(name: String, isDirected: Boolean): GraphCfg? {
 			val data = load(name) ?: return null
+			val groups = mutableListOf<List<String>>()
+			for(line in data["groups"].parseList()) {
+				groups.add(line.toStringList())
+			}
 			return GraphCfg(
 				graph = Graph.new(data["vertices"], data["edges"], isDirected),
 				k = data["k"].parseInt(),
@@ -24,6 +29,7 @@ data class GraphCfg(
 				vertexWeight = data["vertexWeight"].toDoubleList(),
 				vertexColor = data["vertexColor"].toStringList(),
 				terminals = data["terminals"].toStringList(),
+				groups = groups,
 			)
 		}
 	}
