@@ -1,3 +1,6 @@
+## v0.1.59 - Additional Max Coverage 
+* **Commit**: 2026-03-08 18:45
+* Add `weighted` to Max Coverage
 ## v0.1.58 - Additional Steiner Tree
 * **Commit**: 2026-03-07 12:48
 * Add `group`, `degree` to Steiner Tree

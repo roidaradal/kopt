@@ -18,3 +18,20 @@ basic.2 {
         4 : V5 V6
     }
 }
+weighted.1 {
+    limit       : 3
+    universal   : A B C D E
+    subsets     : {
+            1   : A B
+            2   : B C
+            3   : C D E
+            4   : A E
+    }
+    weight      : {
+            A   : 100
+            B   : 80
+            C   : 60
+            D   : 40
+            E   : 20
+    }
+}
