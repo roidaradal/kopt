@@ -13,6 +13,7 @@ fun newMaxCoverage(variant: String, n: Int): Problem? {
 	return when (variant) {
 		"basic" -> maxCoverage(name)
 		"weighted" -> weightedMaxCoverage(name)
+		"budgeted" -> budgetedMaxCoverage(name)
 		else -> null
 	}
 }
@@ -56,5 +57,27 @@ fun weightedMaxCoverage(name: String): Problem? {
 		}
 		return covered.sumOf { cfg.weight[it] ?: 0.0 }
 	}
+	return p
+}
+
+fun budgetedMaxCoverage(name: String): Problem? {
+	val (p, cfg) = newSubsetsProblem(name)
+	if (p == null || cfg == null || cfg.budget == 0.0) return null
+	if(cfg.universal.size != cfg.value.size || cfg.names.size != cfg.weight.size) return null
+
+	p.addUniversalConstraint(fun(solution: Solution): Boolean {
+		val totalWeight = solution.asSubset().sumOf { cfg.weight[cfg.names[it]] ?: 0.0 }
+		return totalWeight <= cfg.budget
+	})
+
+	val valueOf = cfg.universal.zip(cfg.value).toMap()
+	p.objectiveFn = fun(solution: Solution): Score {
+		val covered = mutableSetOf<String>()
+		for(x in solution.asSubset()) {
+			covered.addAll(cfg.subsets[x])
+		}
+		return covered.sumOf { valueOf[it] ?: 0.0 }
+	}
+
 	return p
 }

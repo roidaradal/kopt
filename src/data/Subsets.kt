@@ -6,6 +6,8 @@ data class Subsets(
 	val subsets: List<List<String>> = emptyList(),
 	val limit: Int = 0,
 	val weight: Map<String, Double> = emptyMap(),
+	val budget: Double = 0.0,
+	val value: List<Double> = emptyList(),
 ) {
 	companion object {
 		fun new(name: String): Subsets? {
@@ -26,6 +28,8 @@ data class Subsets(
 				subsets = subsets,
 				limit = data["limit"].parseInt(),
 				weight = weight,
+				budget = data["budget"].parseDouble(),
+				value = data["value"].toDoubleList(),
 			)
 		}
 	}

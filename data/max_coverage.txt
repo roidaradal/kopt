@@ -35,3 +35,20 @@ weighted.1 {
             E   : 20
     }
 }
+budgeted.1 {
+    budget      : 10
+    universal   : A B C D E
+    value       : 3 5 1 1 1
+    subsets     : {
+            S   : B
+            E   : C
+            I   : A B
+            B   : C D E
+    }
+    weight      : {
+            S   : 1
+            E   : 1
+            I   : 5
+            B   : 5
+    }
+}

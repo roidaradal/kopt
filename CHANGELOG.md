@@ -1,3 +1,6 @@
+## v0.1.60 - Additional Max Coverage 
+* **Commit**: 2026-03-09 22:25
+* Add `budgeted` to Max Coverage
 ## v0.1.59 - Additional Max Coverage 
 * **Commit**: 2026-03-08 18:45
 * Add `weighted` to Max Coverage
