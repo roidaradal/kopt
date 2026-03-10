@@ -1,3 +1,6 @@
+## v0.1.61 - Additional Clique 
+* **Commit**: 2026-03-10 18:48
+* Add `vertex_weighted` to Clique
 ## v0.1.60 - Additional Max Coverage 
 * **Commit**: 2026-03-09 22:25
 * Add `budgeted` to Max Coverage

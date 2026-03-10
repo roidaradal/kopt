@@ -6,6 +6,7 @@ import data.newName
 import discrete.Goal
 import discrete.Problem
 import discrete.Solution
+import fn.ScoreFn
 import fn.asSubset
 import fn.isClique
 import fn.mapList
@@ -15,6 +16,7 @@ fun newClique(variant: String, n: Int): Problem? {
 	return when (variant) {
 		"basic" -> clique(name)
 		"k" -> kClique(name)
+		"vertex_weighted" -> vertexWeightedClique(name)
 		else -> null
 	}
 }
@@ -46,5 +48,13 @@ fun kClique(name: String): Problem? {
 	})
 	p.goal = Goal.SATISFY
 	p.objectiveFn = null
+	return p
+}
+
+fun vertexWeightedClique(name: String): Problem? {
+	val (p, cfg) = newCliqueProblem(name)
+	if(p == null || cfg == null || cfg.vertexWeight.size != cfg.graph.vertices.size) return null
+
+	p.objectiveFn = ScoreFn.sumWeightedValues(p.variables, cfg.vertexWeight)
 	return p
 }
