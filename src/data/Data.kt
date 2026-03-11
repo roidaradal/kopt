@@ -130,7 +130,11 @@ fun String?.parseMap(): StringMap {
 	}
 }
 
-fun String.matrixRow(removeFirst: Boolean): List<Double> {
+fun String?.matrixRow(removeFirst: Boolean): List<Double> {
 	val start = if (removeFirst) 1 else 0
-	return this.spaceSplit().drop(start).map(String::parseDoubleInf)
+	return if(this.isNullOrBlank()) {
+		emptyList()
+	} else {
+		this.spaceSplit().drop(start).map(String::parseDoubleInf)
+	}
 }

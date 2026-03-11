@@ -24,7 +24,7 @@ data class GraphCfg(
 			return GraphCfg(
 				graph = Graph.new(data["vertices"], data["edges"], isDirected),
 				k = data["k"].parseInt(),
-				edgeWeight = data["edgeWeight"].toDoubleList(),
+				edgeWeight = data["edgeWeight"].matrixRow(false),
 				edgeColor = data["edgeColor"].toStringList(),
 				vertexWeight = data["vertexWeight"].toDoubleList(),
 				vertexColor = data["vertexColor"].toStringList(),

@@ -1,3 +1,6 @@
+## v0.1.62 - Additional K-Center
+* **Commit**: 2026-03-11 17:06
+* Add `weighted` to K-Center
 ## v0.1.61 - Additional Clique 
 * **Commit**: 2026-03-10 18:48
 * Add `vertex_weighted` to Clique
